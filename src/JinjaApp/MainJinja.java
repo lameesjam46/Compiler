@@ -34,7 +34,8 @@ public class MainJinja {
             JinjaParser parser = new JinjaParser(tokens);
 
             // 6️⃣ استدعاء قاعدة البداية (start rule)
-            ParseTree tree = parser.template();
+            ParseTree tree = parser.document();
+
 
             // 7️⃣ بناء الـ AST باستخدام Visitor
             JinjaASTBuilder builder = new JinjaASTBuilder();

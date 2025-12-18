@@ -12,6 +12,12 @@ public class HtmlNode extends ASTNode{
         this.children = children;
     }
 
+
+    public void add(ASTNode child) {
+        if (child != null) children.add(child);
+    }
+
+
     public String getTagName() {
         return tagName;
     }

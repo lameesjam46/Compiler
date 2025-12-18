@@ -9,90 +9,118 @@ import java.util.List;
 
 public class JinjaASTBuilder extends JinjaParserBaseVisitor<ASTNode> {
 
-    // =====================
-    // template
-    // =====================
+    // ======================================================
+    // document
+    // ======================================================
     @Override
-    public ASTNode visitTemplate(JinjaParser.TemplateContext ctx) {
+    public ASTNode visitDocumentRoot(JinjaParser.DocumentRootContext ctx) {
 
         List<ASTNode> children = new ArrayList<>();
 
-        for (JinjaParser.ElementContext el : ctx.element()) {
-            ASTNode node = visit(el);
-            if (node != null) {
-                children.add(node);
+        for (JinjaParser.NodeContext n : ctx.node()) {
+            ASTNode child = visit(n);
+            if (child != null) {
+                children.add(child);
             }
         }
 
         return new HtmlNode("template", children, ctx.getStart().getLine());
     }
 
-    // =====================
+    // ======================================================
     // TEXT
-    // element : TEXT #TextNode
-    // =====================
+    // ======================================================
     @Override
-    public ASTNode visitTextNode(JinjaParser.TextNodeContext ctx) {
+    public ASTNode visitNodeHtmlText(JinjaParser.NodeHtmlTextContext ctx) {
         return new TextNode(
-                ctx.TEXT().getText(),
+                ctx.HTML_TEXT().getText(),
                 ctx.getStart().getLine()
         );
     }
 
-    // =====================
-    // {{ variable }}
-    // element : variable #JinjaExprNode
-    // =====================
+    // ======================================================
+    // HTML <tag>...</tag>
+    // ======================================================
     @Override
-    public ASTNode visitJinjaExprNode(JinjaParser.JinjaExprNodeContext ctx) {
-        return new JinjaExprNode(
-                ctx.variable().ID().getText(),
-                ctx.getStart().getLine()
-        );
-    }
+    public ASTNode visitHtmlNormalElement(JinjaParser.HtmlNormalElementContext ctx) {
 
-    // =====================
-    // {% if ID %}
-    // element : ifStatement #JinjaIfNode
-    // =====================
-    @Override
-    public ASTNode visitJinjaIfNode(JinjaParser.JinjaIfNodeContext ctx) {
+        String tag = ctx.TAG_NAME().getText();
+        List<ASTNode> children = new ArrayList<>();
 
-        String condition = ctx.ifStatement().ID().getText();
+        if (ctx.htmlContent() != null) {
 
-        List<ASTNode> body = new ArrayList<>();
+            JinjaParser.HtmlContentBlockContext content =
+                    (JinjaParser.HtmlContentBlockContext) ctx.htmlContent();
 
-        for (JinjaParser.ElementContext el : ctx.ifStatement().element()) {
-            body.add(visit(el));
+            for (JinjaParser.NodeContext n : content.node()) {
+                ASTNode child = visit(n);
+                if (child != null) {
+                    children.add(child);
+                }
+            }
         }
+
+        return new HtmlNode(tag, children, ctx.getStart().getLine());
+    }
+
+
+    @Override
+    public ASTNode visitHtmlSelfClosingElement(JinjaParser.HtmlSelfClosingElementContext ctx) {
+        return new HtmlNode(
+                ctx.TAG_NAME().getText(),
+                new ArrayList<>(),
+                ctx.getStart().getLine()
+        );
+    }
+
+    // ======================================================
+    // {{ expression }}
+    // ======================================================
+    @Override
+    public ASTNode visitJinjaExpression(JinjaParser.JinjaExpressionContext ctx) {
+        return new JinjaExprNode(
+                ctx.expression().getText(),
+                ctx.getStart().getLine()
+        );
+    }
+
+    // ======================================================
+    // {% if %}
+    // ======================================================
+    @Override
+    public ASTNode visitIfStatement(JinjaParser.IfStatementContext ctx) {
+
+        JinjaExprNode condition =
+                new JinjaExprNode(
+                        ctx.expression().getText(),
+                        ctx.getStart().getLine()
+                );
 
         return new JinjaIfNode(
-                new JinjaExprNode(condition, ctx.getStart().getLine()),
-                body,
+                condition,
+                new ArrayList<>(),
                 ctx.getStart().getLine()
         );
     }
 
-    // =====================
-    // {% for ID in ID %}
-    // element : forStatement #JinjaForNode
-    // =====================
+    // ======================================================
+    // {% for %}
+    // ======================================================
     @Override
-    public ASTNode visitJinjaForNode(JinjaParser.JinjaForNodeContext ctx) {
+    public ASTNode visitForStatement(JinjaParser.ForStatementContext ctx) {
 
-        String item = ctx.forStatement().ID(0).getText();
-        String iterable = ctx.forStatement().ID(1).getText();
+        String variable = ctx.JINJA_ID().getText();
 
-        List<ASTNode> body = new ArrayList<>();
-
-        for (JinjaParser.ElementContext el : ctx.forStatement().element()) {
-            body.add(visit(el));
-        }
+        JinjaExprNode iterable =
+                new JinjaExprNode(
+                        ctx.expression().getText(),
+                        ctx.getStart().getLine()
+                );
 
         return new JinjaForNode(
-                item,
-                new JinjaExprNode(iterable, ctx.getStart().getLine()),
-                body,
+                variable,
+                iterable,
+                new ArrayList<>(),
                 ctx.getStart().getLine()
         );
     }
