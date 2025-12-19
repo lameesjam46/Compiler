@@ -11,161 +11,282 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface PyFlaskParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#program}.
+	 * Visit a parse tree produced by the {@code ProgramRoot}
+	 * labeled alternative in {@link PyFlaskParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProgram(PyFlaskParser.ProgramContext ctx);
+	T visitProgramRoot(PyFlaskParser.ProgramRootContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#statement}.
+	 * Visit a parse tree produced by the {@code StmtImport}
+	 * labeled alternative in {@link PyFlaskParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatement(PyFlaskParser.StatementContext ctx);
+	T visitStmtImport(PyFlaskParser.StmtImportContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#importStmt}.
+	 * Visit a parse tree produced by the {@code StmtDecoratedFunction}
+	 * labeled alternative in {@link PyFlaskParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitImportStmt(PyFlaskParser.ImportStmtContext ctx);
+	T visitStmtDecoratedFunction(PyFlaskParser.StmtDecoratedFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#importList}.
+	 * Visit a parse tree produced by the {@code StmtFunction}
+	 * labeled alternative in {@link PyFlaskParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitImportList(PyFlaskParser.ImportListContext ctx);
+	T visitStmtFunction(PyFlaskParser.StmtFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#routeStmt}.
+	 * Visit a parse tree produced by the {@code StmtSimple}
+	 * labeled alternative in {@link PyFlaskParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRouteStmt(PyFlaskParser.RouteStmtContext ctx);
+	T visitStmtSimple(PyFlaskParser.StmtSimpleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#functionDef}.
+	 * Visit a parse tree produced by the {@code SimpleAssign}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctionDef(PyFlaskParser.FunctionDefContext ctx);
+	T visitSimpleAssign(PyFlaskParser.SimpleAssignContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#block}.
+	 * Visit a parse tree produced by the {@code SimpleReturn}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBlock(PyFlaskParser.BlockContext ctx);
+	T visitSimpleReturn(PyFlaskParser.SimpleReturnContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#simpleStmt}.
+	 * Visit a parse tree produced by the {@code SimpleIf}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSimpleStmt(PyFlaskParser.SimpleStmtContext ctx);
+	T visitSimpleIf(PyFlaskParser.SimpleIfContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#assignment}.
+	 * Visit a parse tree produced by the {@code SimpleFor}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignment(PyFlaskParser.AssignmentContext ctx);
+	T visitSimpleFor(PyFlaskParser.SimpleForContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#exprStart}.
+	 * Visit a parse tree produced by the {@code BreakStmtNode}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExprStart(PyFlaskParser.ExprStartContext ctx);
+	T visitBreakStmtNode(PyFlaskParser.BreakStmtNodeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code CallExpr}
+	 * Visit a parse tree produced by the {@code ExprStmtNode}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprStmtNode(PyFlaskParser.ExprStmtNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FromImportStmt}
+	 * labeled alternative in {@link PyFlaskParser#importstatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFromImportStmt(PyFlaskParser.FromImportStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code GlobalImportStmt}
+	 * labeled alternative in {@link PyFlaskParser#importstatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGlobalImportStmt(PyFlaskParser.GlobalImportStmtContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ImportListNode}
+	 * labeled alternative in {@link PyFlaskParser#importList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImportListNode(PyFlaskParser.ImportListNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DecoratorNode}
+	 * labeled alternative in {@link PyFlaskParser#decorator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecoratorNode(PyFlaskParser.DecoratorNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FunctionDefNode}
+	 * labeled alternative in {@link PyFlaskParser#functionDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDefNode(PyFlaskParser.FunctionDefNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyFlaskParser#parameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameters(PyFlaskParser.ParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code BlockNode}
+	 * labeled alternative in {@link PyFlaskParser#block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlockNode(PyFlaskParser.BlockNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IfStmtNode}
+	 * labeled alternative in {@link PyFlaskParser#ifstatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfStmtNode(PyFlaskParser.IfStmtNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ForStmtNode}
+	 * labeled alternative in {@link PyFlaskParser#forstatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForStmtNode(PyFlaskParser.ForStmtNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ReturnStmtNode}
+	 * labeled alternative in {@link PyFlaskParser#returnStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnStmtNode(PyFlaskParser.ReturnStmtNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AssignStmtNode}
+	 * labeled alternative in {@link PyFlaskParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignStmtNode(PyFlaskParser.AssignStmtNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Multiplication}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCallExpr(PyFlaskParser.CallExprContext ctx);
+	T visitMultiplication(PyFlaskParser.MultiplicationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ListExpr}
+	 * Visit a parse tree produced by the {@code Addition}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitListExpr(PyFlaskParser.ListExprContext ctx);
+	T visitAddition(PyFlaskParser.AdditionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code DictExpr}
+	 * Visit a parse tree produced by the {@code ListLiteralNode}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDictExpr(PyFlaskParser.DictExprContext ctx);
+	T visitListLiteralNode(PyFlaskParser.ListLiteralNodeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code IdExpr}
+	 * Visit a parse tree produced by the {@code AtomStringNode}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIdExpr(PyFlaskParser.IdExprContext ctx);
+	T visitAtomStringNode(PyFlaskParser.AtomStringNodeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code StringExpr}
+	 * Visit a parse tree produced by the {@code Attribute}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStringExpr(PyFlaskParser.StringExprContext ctx);
+	T visitAttribute(PyFlaskParser.AttributeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code NumberExpr}
+	 * Visit a parse tree produced by the {@code Parens}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberExpr(PyFlaskParser.NumberExprContext ctx);
+	T visitParens(PyFlaskParser.ParensContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#arglist}.
+	 * Visit a parse tree produced by the {@code AtomIdNode}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArglist(PyFlaskParser.ArglistContext ctx);
+	T visitAtomIdNode(PyFlaskParser.AtomIdNodeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code KeywordArg}
-	 * labeled alternative in {@link PyFlaskParser#arg}.
+	 * Visit a parse tree produced by the {@code FalseLit}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitKeywordArg(PyFlaskParser.KeywordArgContext ctx);
+	T visitFalseLit(PyFlaskParser.FalseLitContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code PositionalArg}
-	 * labeled alternative in {@link PyFlaskParser#arg}.
+	 * Visit a parse tree produced by the {@code Subscript}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPositionalArg(PyFlaskParser.PositionalArgContext ctx);
+	T visitSubscript(PyFlaskParser.SubscriptContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#listLiteral}.
+	 * Visit a parse tree produced by the {@code DictLiteralNode}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitListLiteral(PyFlaskParser.ListLiteralContext ctx);
+	T visitDictLiteralNode(PyFlaskParser.DictLiteralNodeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#elementList}.
+	 * Visit a parse tree produced by the {@code NoneLit}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitElementList(PyFlaskParser.ElementListContext ctx);
+	T visitNoneLit(PyFlaskParser.NoneLitContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#element}.
+	 * Visit a parse tree produced by the {@code Subtraction}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitElement(PyFlaskParser.ElementContext ctx);
+	T visitSubtraction(PyFlaskParser.SubtractionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#dictLiteral}.
+	 * Visit a parse tree produced by the {@code Comparison}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDictLiteral(PyFlaskParser.DictLiteralContext ctx);
+	T visitComparison(PyFlaskParser.ComparisonContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#pairList}.
+	 * Visit a parse tree produced by the {@code AtomNumberNode}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPairList(PyFlaskParser.PairListContext ctx);
+	T visitAtomNumberNode(PyFlaskParser.AtomNumberNodeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PyFlaskParser#pair}.
+	 * Visit a parse tree produced by the {@code TrueLit}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPair(PyFlaskParser.PairContext ctx);
+	T visitTrueLit(PyFlaskParser.TrueLitContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Division}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDivision(PyFlaskParser.DivisionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FunctionCall}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCall(PyFlaskParser.FunctionCallContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TernaryExpr}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTernaryExpr(PyFlaskParser.TernaryExprContext ctx);
 }

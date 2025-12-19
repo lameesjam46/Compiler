@@ -1,76 +1,9 @@
-<!DOCTYPE html>
-<!-- قالب عرض المنتجات -->
+<div>
+    <h1>Product Details</h1>
 
-<div id="products-app" class="products-container">
-
-    <header class="page-header">
-        <h1>{{ store.name | upper }}</h1>
-        <p>{{ store.description }}</p>
-        <p>سنة التأسيس: {{ store.year }}</p>
-    </header>
-
-    {% set has_products = store.products_count > 0 and store.is_open %}
-
-    {% if has_products %}
-    <section class="products-list">
-
-        <h2>المنتجات المتوفرة</h2>
-
-        {% for product in store.products %}
-        <div class="product-card">
-
-            <h3>{{ product.name | upper }}</h3>
-
-            <p class="sku">
-                الرمز:
-                {{ product.sku }}
-            </p>
-
-            <p class="price">
-                السعر:
-                {{ product.price + product.tax }}
-            </p>
-
-            {% if product.in_stock %}
-            <p class="status available">متوفر</p>
-
-            {% elif product.is_preorder %}
-            <p class="status preorder">طلب مسبق</p>
-
-            {% else %}
-            <p class="status unavailable">غير متوفر</p>
-            {% endif %}
-
-            <ul class="features">
-                {% for feature in product.features[0:3] %}
-                <li>{{ feature }}</li>
-                {% endfor %}
-            </ul>
-
-            <p class="rating">
-                التقييم:
-                {{ (product.rating + 1) / 2 }}
-            </p>
-
-        </div>
-        {% endfor %}
-
-    </section>
-
-    {% else %}
-    <section class="no-products">
-        <p>لا توجد منتجات متاحة حالياً</p>
-    </section>
+    {% if product %}
+    <div>
+        {{ product }}
+    </div>
     {% endif %}
-
-    <footer class="page-footer">
-        <p>
-            {{ store.name }} © {{ store.year }}
-        </p>
-
-        {% if store.owner is none %}
-        <p>لا يوجد مالك مسجل</p>
-        {% endif %}
-    </footer>
-
 </div>

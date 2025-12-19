@@ -2,126 +2,93 @@ parser grammar PyFlaskParser;
 
 options { tokenVocab=PyFlaskLexer; }
 
-/* =======================
-   Program structure
-   ======================= */
-
-program
-    : (statement (NEWLINE)*)* EOF
-    ;
-
+// ============ ENTRY ============
+program : (statement | NEWLINE)* EOF # ProgramRoot ;
+// ============ STATEMENTS ============
 statement
-    : importStmt
-    | routeStmt
-    | functionDef
-    | assignment
-    | simpleStmt
+    : importstatement                     # StmtImport
+    | decorator functionDef               # StmtDecoratedFunction
+    | functionDef                         # StmtFunction
+    | simpleStmt                          # StmtSimple
     ;
 
-/* =======================
-   Imports
-   ======================= */
+// ============ STATEMENTS ============
 
-importStmt
-    : IMPORT importList
-    | FROM ID IMPORT importList
+simpleStmt
+    : assignment                          # SimpleAssign
+    | returnStmt                          # SimpleReturn
+    | ifstatement                         # SimpleIf
+    | forstatement                        # SimpleFor
+    | BREAK                               # BreakStmtNode
+    | expr                                # ExprStmtNode
+    ;
+
+// ============ IMPORT ============
+importstatement
+    : FROM ID (DOT ID)* IMPORT importList # FromImportStmt
+    | IMPORT importList                   # GlobalImportStmt
     ;
 
 importList
+    : ID (COMMA ID)* # ImportListNode
+    ;
+
+// ============ DECORATOR ============
+decorator
+    : ATSIGN expr                         # DecoratorNode
+    ;
+
+// ============ FUNCTION ============
+functionDef
+    : DEF ID LPAREN parameters? RPAREN COLON block # FunctionDefNode
+    ;
+
+parameters
     : ID (COMMA ID)*
     ;
 
-/* =======================
-   Routes
-   ======================= */
-
-routeStmt
-    : ID DOT ROUTE LPAREN STRING RPAREN
-    ;
-
-/* =======================
-   Functions
-   ======================= */
-
-functionDef
-    : DEF ID LPAREN RPAREN COLON block
-    ;
-
+// ============ BLOCK ============
+// الفيزيتور يتوقع وجود كلاس اسمه BlockNode
 block
-    : (simpleStmt (NEWLINE)*)*
+    : BLOCKSTART (statement | NEWLINE)* BLOCKEND # BlockNode
+    ;
+// ============ CONTROL ============
+ifstatement
+    : IF expr COLON block (ELSE COLON block)? # IfStmtNode
     ;
 
-/* =======================
-   Statements
-   ======================= */
+forstatement
+    : FOR ID IN expr COLON block          # ForStmtNode
+    ;
 
-simpleStmt
-    : RETURN exprStart
-    | exprStart
+// ============ RETURN & ASSIGN ============
+returnStmt
+    : RETURN expr?                        # ReturnStmtNode
     ;
 
 assignment
-    : ID EQUAL exprStart
+    : expr ASSIGN expr                    # AssignStmtNode
     ;
 
-/* =======================
-   Expressions (NEWLINE-safe)
-   ======================= */
-
-exprStart
-    : (NEWLINE)* expr
-    ;
-
+// ============ EXPRESSIONS ============
 expr
-    : ID LPAREN arglist? RPAREN      # CallExpr
-    | listLiteral                    # ListExpr
-    | dictLiteral                    # DictExpr
-    | ID                             # IdExpr
-    | STRING                         # StringExpr
-    | NUMBER                         # NumberExpr
-    ;
-
-/* =======================
-   Function arguments
-   ======================= */
-
-arglist
-    : arg ((COMMA | NEWLINE)+ arg)* (COMMA | NEWLINE)*
-    ;
-
-arg
-    : ID EQUAL exprStart             # KeywordArg
-    | exprStart                      # PositionalArg
-    ;
-
-/* =======================
-   List literal
-   ======================= */
-
-listLiteral
-    : LBRACK elementList? RBRACK
-    ;
-
-elementList
-    : element ((COMMA | NEWLINE)+ element)* (COMMA | NEWLINE)*
-    ;
-
-element
-    : exprStart
-    ;
-
-/* =======================
-   Dict literal
-   ======================= */
-
-dictLiteral
-    : LBRACE pairList? RBRACE
-    ;
-
-pairList
-    : pair ((COMMA | NEWLINE)+ pair)* (COMMA | NEWLINE)*
-    ;
-
-pair
-    : (STRING | ID) COLON exprStart
+    : LPAREN expr RPAREN               # Parens
+    | expr LBRACK expr RBRACK          # Subscript
+    | expr DOT ID                      # Attribute
+    | expr LPAREN ( (expr | ID ASSIGN expr) (COMMA (expr | ID ASSIGN expr))*)? RPAREN # FunctionCall
+    | expr STAR expr                   # Multiplication
+    | expr SLASH expr                  # Division
+    | expr PLUS expr                   # Addition
+    | expr MINUS expr                  # Subtraction
+    | expr (GT | LT | GTE | LTE | EQ | NEQ) expr # Comparison
+    // أولوية الـ Inline If (Ternary) تأتي هنا
+    | expr IF expr ELSE expr           # TernaryExpr
+    | ID                               # AtomIdNode
+    | NUMBER                           # AtomNumberNode
+    | STRING                           # AtomStringNode
+    | TRUE                             # TrueLit
+    | FALSE                            # FalseLit
+    | NONE                             # NoneLit
+    | LBRACK (expr (COMMA expr)*)? RBRACK # ListLiteralNode
+    | LBRACE (STRING COLON expr (COMMA STRING COLON expr)*)? RBRACE # DictLiteralNode
     ;

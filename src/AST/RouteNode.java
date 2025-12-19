@@ -1,16 +1,15 @@
 package AST;
 
 public class RouteNode extends ASTNode {
-    public String path;
-    public String handlerName;
+    private String path;
+    // اجعلها public لتتوافق مع كود المين الخاص بك ((RouteNode)n).handlerName
+    public String handlerName = "None";
 
-    public RouteNode(String path, String handlerName, Integer lineno) {
-        super("Route", lineno);
+    public RouteNode(String path, int line) {
+        super("Route", line);
         this.path = path;
-        this.handlerName = handlerName;
     }
 
     public String getPath() { return path; }
     public String getHandlerName() { return handlerName; }
 }
-

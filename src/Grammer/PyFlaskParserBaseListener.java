@@ -17,301 +17,481 @@ public class PyFlaskParserBaseListener implements PyFlaskParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProgram(PyFlaskParser.ProgramContext ctx) { }
+	@Override public void enterProgramRoot(PyFlaskParser.ProgramRootContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProgram(PyFlaskParser.ProgramContext ctx) { }
+	@Override public void exitProgramRoot(PyFlaskParser.ProgramRootContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatement(PyFlaskParser.StatementContext ctx) { }
+	@Override public void enterStmtImport(PyFlaskParser.StmtImportContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatement(PyFlaskParser.StatementContext ctx) { }
+	@Override public void exitStmtImport(PyFlaskParser.StmtImportContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterImportStmt(PyFlaskParser.ImportStmtContext ctx) { }
+	@Override public void enterStmtDecoratedFunction(PyFlaskParser.StmtDecoratedFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitImportStmt(PyFlaskParser.ImportStmtContext ctx) { }
+	@Override public void exitStmtDecoratedFunction(PyFlaskParser.StmtDecoratedFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterImportList(PyFlaskParser.ImportListContext ctx) { }
+	@Override public void enterStmtFunction(PyFlaskParser.StmtFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitImportList(PyFlaskParser.ImportListContext ctx) { }
+	@Override public void exitStmtFunction(PyFlaskParser.StmtFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRouteStmt(PyFlaskParser.RouteStmtContext ctx) { }
+	@Override public void enterStmtSimple(PyFlaskParser.StmtSimpleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRouteStmt(PyFlaskParser.RouteStmtContext ctx) { }
+	@Override public void exitStmtSimple(PyFlaskParser.StmtSimpleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionDef(PyFlaskParser.FunctionDefContext ctx) { }
+	@Override public void enterSimpleAssign(PyFlaskParser.SimpleAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionDef(PyFlaskParser.FunctionDefContext ctx) { }
+	@Override public void exitSimpleAssign(PyFlaskParser.SimpleAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlock(PyFlaskParser.BlockContext ctx) { }
+	@Override public void enterSimpleReturn(PyFlaskParser.SimpleReturnContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlock(PyFlaskParser.BlockContext ctx) { }
+	@Override public void exitSimpleReturn(PyFlaskParser.SimpleReturnContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSimpleStmt(PyFlaskParser.SimpleStmtContext ctx) { }
+	@Override public void enterSimpleIf(PyFlaskParser.SimpleIfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSimpleStmt(PyFlaskParser.SimpleStmtContext ctx) { }
+	@Override public void exitSimpleIf(PyFlaskParser.SimpleIfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(PyFlaskParser.AssignmentContext ctx) { }
+	@Override public void enterSimpleFor(PyFlaskParser.SimpleForContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment(PyFlaskParser.AssignmentContext ctx) { }
+	@Override public void exitSimpleFor(PyFlaskParser.SimpleForContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExprStart(PyFlaskParser.ExprStartContext ctx) { }
+	@Override public void enterBreakStmtNode(PyFlaskParser.BreakStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExprStart(PyFlaskParser.ExprStartContext ctx) { }
+	@Override public void exitBreakStmtNode(PyFlaskParser.BreakStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCallExpr(PyFlaskParser.CallExprContext ctx) { }
+	@Override public void enterExprStmtNode(PyFlaskParser.ExprStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCallExpr(PyFlaskParser.CallExprContext ctx) { }
+	@Override public void exitExprStmtNode(PyFlaskParser.ExprStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterListExpr(PyFlaskParser.ListExprContext ctx) { }
+	@Override public void enterFromImportStmt(PyFlaskParser.FromImportStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitListExpr(PyFlaskParser.ListExprContext ctx) { }
+	@Override public void exitFromImportStmt(PyFlaskParser.FromImportStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDictExpr(PyFlaskParser.DictExprContext ctx) { }
+	@Override public void enterGlobalImportStmt(PyFlaskParser.GlobalImportStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDictExpr(PyFlaskParser.DictExprContext ctx) { }
+	@Override public void exitGlobalImportStmt(PyFlaskParser.GlobalImportStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdExpr(PyFlaskParser.IdExprContext ctx) { }
+	@Override public void enterImportListNode(PyFlaskParser.ImportListNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIdExpr(PyFlaskParser.IdExprContext ctx) { }
+	@Override public void exitImportListNode(PyFlaskParser.ImportListNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStringExpr(PyFlaskParser.StringExprContext ctx) { }
+	@Override public void enterDecoratorNode(PyFlaskParser.DecoratorNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStringExpr(PyFlaskParser.StringExprContext ctx) { }
+	@Override public void exitDecoratorNode(PyFlaskParser.DecoratorNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumberExpr(PyFlaskParser.NumberExprContext ctx) { }
+	@Override public void enterFunctionDefNode(PyFlaskParser.FunctionDefNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNumberExpr(PyFlaskParser.NumberExprContext ctx) { }
+	@Override public void exitFunctionDefNode(PyFlaskParser.FunctionDefNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArglist(PyFlaskParser.ArglistContext ctx) { }
+	@Override public void enterParameters(PyFlaskParser.ParametersContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArglist(PyFlaskParser.ArglistContext ctx) { }
+	@Override public void exitParameters(PyFlaskParser.ParametersContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterKeywordArg(PyFlaskParser.KeywordArgContext ctx) { }
+	@Override public void enterBlockNode(PyFlaskParser.BlockNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitKeywordArg(PyFlaskParser.KeywordArgContext ctx) { }
+	@Override public void exitBlockNode(PyFlaskParser.BlockNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPositionalArg(PyFlaskParser.PositionalArgContext ctx) { }
+	@Override public void enterIfStmtNode(PyFlaskParser.IfStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPositionalArg(PyFlaskParser.PositionalArgContext ctx) { }
+	@Override public void exitIfStmtNode(PyFlaskParser.IfStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterListLiteral(PyFlaskParser.ListLiteralContext ctx) { }
+	@Override public void enterForStmtNode(PyFlaskParser.ForStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitListLiteral(PyFlaskParser.ListLiteralContext ctx) { }
+	@Override public void exitForStmtNode(PyFlaskParser.ForStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElementList(PyFlaskParser.ElementListContext ctx) { }
+	@Override public void enterReturnStmtNode(PyFlaskParser.ReturnStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitElementList(PyFlaskParser.ElementListContext ctx) { }
+	@Override public void exitReturnStmtNode(PyFlaskParser.ReturnStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElement(PyFlaskParser.ElementContext ctx) { }
+	@Override public void enterAssignStmtNode(PyFlaskParser.AssignStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitElement(PyFlaskParser.ElementContext ctx) { }
+	@Override public void exitAssignStmtNode(PyFlaskParser.AssignStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDictLiteral(PyFlaskParser.DictLiteralContext ctx) { }
+	@Override public void enterMultiplication(PyFlaskParser.MultiplicationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDictLiteral(PyFlaskParser.DictLiteralContext ctx) { }
+	@Override public void exitMultiplication(PyFlaskParser.MultiplicationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPairList(PyFlaskParser.PairListContext ctx) { }
+	@Override public void enterAddition(PyFlaskParser.AdditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPairList(PyFlaskParser.PairListContext ctx) { }
+	@Override public void exitAddition(PyFlaskParser.AdditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPair(PyFlaskParser.PairContext ctx) { }
+	@Override public void enterListLiteralNode(PyFlaskParser.ListLiteralNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPair(PyFlaskParser.PairContext ctx) { }
+	@Override public void exitListLiteralNode(PyFlaskParser.ListLiteralNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAtomStringNode(PyFlaskParser.AtomStringNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomStringNode(PyFlaskParser.AtomStringNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAttribute(PyFlaskParser.AttributeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAttribute(PyFlaskParser.AttributeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParens(PyFlaskParser.ParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParens(PyFlaskParser.ParensContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAtomIdNode(PyFlaskParser.AtomIdNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomIdNode(PyFlaskParser.AtomIdNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFalseLit(PyFlaskParser.FalseLitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFalseLit(PyFlaskParser.FalseLitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSubscript(PyFlaskParser.SubscriptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSubscript(PyFlaskParser.SubscriptContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDictLiteralNode(PyFlaskParser.DictLiteralNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDictLiteralNode(PyFlaskParser.DictLiteralNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNoneLit(PyFlaskParser.NoneLitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNoneLit(PyFlaskParser.NoneLitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSubtraction(PyFlaskParser.SubtractionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSubtraction(PyFlaskParser.SubtractionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComparison(PyFlaskParser.ComparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparison(PyFlaskParser.ComparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAtomNumberNode(PyFlaskParser.AtomNumberNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAtomNumberNode(PyFlaskParser.AtomNumberNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTrueLit(PyFlaskParser.TrueLitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTrueLit(PyFlaskParser.TrueLitContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDivision(PyFlaskParser.DivisionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDivision(PyFlaskParser.DivisionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionCall(PyFlaskParser.FunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionCall(PyFlaskParser.FunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTernaryExpr(PyFlaskParser.TernaryExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTernaryExpr(PyFlaskParser.TernaryExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
