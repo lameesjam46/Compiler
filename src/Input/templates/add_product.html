@@ -1,15 +1,39 @@
-<div>
-    <h1>Add Product</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>إضافة منتج</title>
+</head>
+<body>
+<h1>إضافة منتج جديد</h1>
 
-    <form>
-        <input>
-        <input>
-        <input>
-    </form>
-</div>
+<!-- نموذج إضافة منتج -->
+<form method="post" action="/add-product">
+    <label for="name">اسم المنتج:</label>
+    <input type="text" id="name" name="name" value="{{ product.name }}"/>
+    <br/>
 
-<style>
-    form {
-        border: solid;
-    }
-</style>
+    <label for="description">الوصف:</label>
+    <textarea id="description" name="description">{{ product.description }}</textarea>
+    <br/>
+
+    <label for="price">السعر:</label>
+    <input type="text" id="price" name="price" value="{{ product.price }}"/>
+    <br/>
+
+    {% if product.price > 0 %}
+    <p>السعر صالح للإضافة!</p>
+    {% else %}
+    <p>الرجاء إدخال سعر أكبر من صفر.</p>
+    {% endif %}
+
+    <button type="submit">إضافة المنتج</button>
+</form>
+
+<!-- قائمة المنتجات الحالية -->
+<ul>
+    {% for p in products %}
+    <li>{{ p.name }} - {{ p.price }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

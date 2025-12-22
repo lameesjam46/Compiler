@@ -1,4 +1,4 @@
-// Generated from C:/Users/dell/IdeaProjects/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/Lenovo/Desktop/Flask_Html_Jinja/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
 package JinjaGrammer;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -325,6 +325,13 @@ public interface JinjaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLiteralId(JinjaParser.LiteralIdContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code literalDouble}
+	 * labeled alternative in {@link JinjaParser#primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteralDouble(JinjaParser.LiteralDoubleContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code literalInt}
 	 * labeled alternative in {@link JinjaParser#primary}.
