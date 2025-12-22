@@ -1,22 +1,16 @@
 package AST;
 
-
 public class AssignmentNode extends ASTNode {
+    private String left;
+    private String right;
 
-    private String target;
-    private String value;
-
-    public AssignmentNode(String target, String value, Integer lineno) {
-        super("Assignment", lineno);
-        this.target = target;
-        this.value = value;
+    public AssignmentNode(String left, String right, int line) {
+        super("Assignment", line);
+        this.left = left;
+        this.right = right;
     }
 
-    public String getTarget() {
-        return target;
-    }
-
-    public String getValue() {
-        return value;
-    }
+    // إضافة هذه الميثودات لحل خطأ cannot find symbol
+    public String getLeft() { return left; }
+    public String getRight() { return right; }
 }

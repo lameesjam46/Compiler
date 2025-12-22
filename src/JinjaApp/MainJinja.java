@@ -19,7 +19,7 @@ public class MainJinja {
 //                return;
 //            }
 
-            String inputFile = "src/Input/display.html";
+            String inputFile = "src/Input/templates/products.html";
 
             // 2️⃣ قراءة الملف
             CharStream input = CharStreams.fromFileName(inputFile);
