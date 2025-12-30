@@ -13,7 +13,7 @@ HASH: '#';
 SEMICOLON:';';
 
 //2
-IMPORT: 'import';
+IMPORT: '@import';
 MEDIA: '@media';
 
 //PROPERTIES
@@ -106,28 +106,24 @@ SIZE_2
 
 fragment HEX : [0-9a-fA-F];
 
- COLOR_VALUE
-    : 'rgb(' WS? [0-9]+ WS? ',' WS? [0-9]+ WS? ',' WS? [0-9]+ WS? ')'
-       | '#' HEX HEX HEX
-       | '#' HEX HEX HEX HEX HEX HEX
-       | 'black'
-       | 'white'
-       | 'red'
-       | 'green'
-       | 'blue'
-       | 'transparent'
-       ;
+COLOR_VALUE : 'rgb(' WS? [0-9]+ WS? ',' WS? [0-9]+ WS? ',' WS? [0-9]+ WS? ')'
+            | '#' HEX HEX HEX
+            | '#' HEX HEX HEX HEX HEX HEX
+            | 'black'
+            | 'white'
+            | 'red'
+            | 'green'
+             | 'blue'
+              | 'yellow'
+              | 'purple'
+               | 'orange' | 'pink' | 'brown' | 'gray' | 'transparent' ;
 
 
 NONE_KW : 'none' ;
 AUTO_KW : 'auto' ;
 
 
-VALUE_GENERAL
-    : [0-9]+ ('.' [0-9]+)? ('px' | 'em' | 'rem' | '%' | 'vw' | 'vh')?
-    | AUTO_KW
-    | NONE_KW
-    ;
+VALUE_GENERAL : [0-9]+ ('.' [0-9]+)? ('px' | 'em' | 'rem' | '%' | 'vw' | 'vh')? ;
 
 
 
@@ -146,10 +142,7 @@ CSS_ELEMENT  : [a-zA-Z_][a-zA-Z0-9_\-]* ;
 
 FLOAT : [0-9]+ '.' [0-9]+;
 
-STRING
-    : '"' (~["\r\n])* '"'
-    | '\'' (~['\r\n])* '\''
-    ;
+STRING : '"' (~["\r\n])* '"' | '\'' (~['\r\n])* '\'' ;
 
 CSS_COMMENT : '/*' .*? '*/' -> skip ;
 

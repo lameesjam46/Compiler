@@ -13,9 +13,8 @@ statement
          | mediaRule
          ;
 
-importStatement
-               : IMPORT SEMICOLON
-               ;
+importStatement : IMPORT STRING SEMICOLON ;
+
 rule
     : selectorGroup LKB property* RKB
     ;
