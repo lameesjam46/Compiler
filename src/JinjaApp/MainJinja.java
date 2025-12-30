@@ -2,14 +2,15 @@ package JinjaApp;
 
 import JinjaAST.*;
 import ASTBuilderVisitor.ASTBuilderVisitor;
+import ASTBuilderVisitor.SymbolTableVisitor;
 import JinjaGrammer.JinjaLexer;
 import JinjaGrammer.JinjaParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import java.util.List;
 
+import java.util.List;
 public class MainJinja {
 
     public static void main(String[] args) throws Exception {
@@ -32,6 +33,13 @@ public class MainJinja {
 
         System.out.println("=== Abstract Syntax Tree Structure ===");
         printNode(ast, "", true);
+        // بعد بناء AST
+        SymbolTableVisitor symVisitor = new SymbolTableVisitor();
+        symVisitor.visit(tree);
+
+        System.out.println("=== Symbol Table ===");
+        symVisitor.getSymbolTable().print();
+
     }
 
 

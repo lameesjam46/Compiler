@@ -23,9 +23,9 @@ import JinjaAST.HtmlText;
 import JinjaAST.Program;
 import JinjaAST.IndexAccess;
 import JinjaAST.FilterCall;
+import JinjaAST.*;
 import JinjaGrammer.JinjaParser;
 import JinjaGrammer.JinjaParserBaseVisitor;
-import JinjaAST.*;
 
 import java.util.*;
 public class ASTBuilderVisitor extends JinjaParserBaseVisitor<Object> {
