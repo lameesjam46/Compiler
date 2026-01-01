@@ -1,4 +1,4 @@
-// Generated from C:/Users/dell/IdeaProjects/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/Lenovo/Desktop/Flask_Html_Jinja/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
 package JinjaGrammer;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -552,6 +552,18 @@ public class JinjaParserBaseListener implements JinjaParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLiteralId(JinjaParser.LiteralIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLiteralDouble(JinjaParser.LiteralDoubleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteralDouble(JinjaParser.LiteralDoubleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

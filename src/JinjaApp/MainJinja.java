@@ -1,80 +1,160 @@
 package JinjaApp;
 
-import JinjaAST.ASTNode;
+import JinjaAST.*;
+import ASTBuilderVisitor.ASTBuilderVisitor;
+import ASTBuilderVisitor.SymbolTableVisitor;
 import JinjaGrammer.JinjaLexer;
 import JinjaGrammer.JinjaParser;
-import JinjaVisitor.JinjaASTBuilder;
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.io.IOException;
-
+import java.util.List;
 public class MainJinja {
-    public static void main(String[] args) {
-        try {
 
-            // 1️⃣ التحقق من وجود ملف الإدخال
-//            if (args.length == 0) {
-//                System.err.println("Usage: java MainJinja <template_file>");
-//                return;
-//            }
+    public static void main(String[] args) throws Exception {
 
-            String inputFile = "src/Input/templates/products.html";
-
-            // 2️⃣ قراءة الملف
-            CharStream input = CharStreams.fromFileName(inputFile);
-
-            // 3️⃣ إنشاء Lexer
-            JinjaLexer lexer = new JinjaLexer(input);
-
-            // 4️⃣ تحويل التوكنات إلى Stream
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-            // 5️⃣ إنشاء Parser
-            JinjaParser parser = new JinjaParser(tokens);
-
-            // 6️⃣ استدعاء قاعدة البداية (start rule)
-            ParseTree tree = parser.document();
+        String filename = "src/Input/templates/add_product.html";
 
 
-            // 7️⃣ بناء الـ AST باستخدام Visitor
-            JinjaASTBuilder builder = new JinjaASTBuilder();
-            ASTNode ast = builder.visit(tree);
+        CharStream cs = CharStreams.fromFileName(filename);
+        JinjaLexer lexer = new JinjaLexer(cs);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-            // 8️⃣ طباعة نتيجة الـ AST
-            System.out.println("======= JINJA AST =======");
-            printAST(ast, 0);
 
-        } catch (IOException e) {
-            System.err.println("File error: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Compiler error:");
-            e.printStackTrace();
-        }
+        JinjaParser parser = new JinjaParser(tokens);
+        ParseTree tree = parser.document();
+
+
+        ASTBuilderVisitor visitor = new ASTBuilderVisitor();
+        Program ast = (Program) visitor.visit(tree);
+
+
+        System.out.println("=== Abstract Syntax Tree Structure ===");
+        printNode(ast, "", true);
+        // بعد بناء AST
+        SymbolTableVisitor symVisitor = new SymbolTableVisitor();
+        symVisitor.visit(tree);
+
+        System.out.println("=== Symbol Table ===");
+        symVisitor.getSymbolTable().print();
+
     }
 
-    // 🟢 دالة مساعدة لطباعة الشجرة بشكل هرمي
-    private static void printAST(ASTNode node, int indent) {
+
+    private static void printNode(Node node, String indent, boolean isLast) {
         if (node == null) return;
 
-        for (int i = 0; i < indent; i++) {
-            System.out.print("  ");
-        }
-        System.out.println(node);
+        String prefix = isLast ? "└── " : "├── ";
 
-        try {
-            var childrenField = node.getClass().getDeclaredField("children");
-            childrenField.setAccessible(true);
-            var children = (Iterable<?>) childrenField.get(node);
-
-            if (children != null) {
-                for (Object child : children) {
-                    printAST((ASTNode) child, indent + 1);
-                }
+        if (node instanceof Program p) {
+            System.out.println(indent + prefix + "Program (line=" + p.getLine() + ")");
+            List<Node> children = p.getNodes();
+            for (int i = 0; i < children.size(); i++) {
+                printNode(children.get(i), indent + (isLast ? "    " : "│   "), i == children.size() - 1);
             }
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {
-            // العقد التي لا تحتوي children يتم تجاهلها
+
+        } else if (node instanceof HtmlElement el) {
+            System.out.println(indent + prefix + "HtmlElement: <" + el.getTagName() + "> (line=" + el.getLine() + ")");
+            List<HtmlAttribute> attrs = el.getAttributes();
+            for (HtmlAttribute attr : attrs) {
+                System.out.println(indent + (isLast ? "    " : "│   ") + "├── HtmlAttribute: "
+                        + attr + " (line=" + attr.getLine() + ")");
+            }
+            List<Node> children = el.getChildren();
+            for (int i = 0; i < children.size(); i++) {
+                printNode(children.get(i), indent + (isLast ? "    " : "│   "), i == children.size() - 1);
+            }
+
+            System.out.println(indent + (isLast ? "    " : "│   ") + "└── HtmlEndTag: </" + el.getTagName() + "> (line=" + el.getLine() + ")");
+
+        } else if (node instanceof HtmlText t) {
+            System.out.println(indent + prefix + "HtmlText: \"" + t.toString() + "\" (line=" + t.getLine() + ")");
+
+        } else if (node instanceof HtmlComment c) {
+            System.out.println(indent + prefix + "HtmlComment: \"" + c.toString() + "\" (line=" + c.getLine() + ")");
+
+        } else if (node instanceof HtmlDoctype d) {
+            System.out.println(indent + prefix + "HtmlDoctype: \"" + d.toString() + "\" (line=" + d.getLine() + ")");
+
+        } else if (node instanceof JinjaExpression je) {
+            System.out.println(indent + prefix + "JinjaExpression (line=" + je.getLine() + ")");
+            printExpression(je.getExpr(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (node instanceof JinjaStatement js) {
+            System.out.println(indent + prefix + "JinjaStatement (line=" + js.getLine() + ")");
+            printNode(js.getStmt(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (node instanceof IfStmt ifStmt) {
+            System.out.println(indent + prefix + "IfStmt (line=" + ifStmt.getLine() + ")");
+            printExpression(ifStmt.getCondition(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (node instanceof ElifStmt elifStmt) {
+            System.out.println(indent + prefix + "ElifStmt (line=" + elifStmt.getLine() + ")");
+            printExpression(elifStmt.getCondition(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (node instanceof ElseStmt) {
+            System.out.println(indent + prefix + "ElseStmt (line=" + node.getLine() + ")");
+
+        } else if (node instanceof ForStmt fs) {
+            System.out.println(indent + prefix + "ForStmt: " + fs.getVar() + " in ... (line=" + fs.getLine() + ")");
+            printExpression(fs.getIterable(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (node instanceof SetStmt ss) {
+            System.out.println(indent + prefix + "SetStmt: " + ss.getVar() + " = ... (line=" + ss.getLine() + ")");
+            printExpression(ss.getValue(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (node instanceof BreakStmt) {
+            System.out.println(indent + prefix + "BreakStmt (line=" + node.getLine() + ")");
+
+        } else if (node instanceof ContinueStmt) {
+            System.out.println(indent + prefix + "ContinueStmt (line=" + node.getLine() + ")");
+
+        } else if (node instanceof EndIfStmt) {
+            System.out.println(indent + prefix + "EndIfStmt (line=" + node.getLine() + ")");
+
+        } else if (node instanceof EndForStmt) {
+            System.out.println(indent + prefix + "EndForStmt (line=" + node.getLine() + ")");
+
+        } else {
+            System.out.println(indent + prefix + "Unknown Node: " + node + " (line=" + node.getLine() + ")");
         }
     }
+
+
+    private static void printExpression(Expression expr, String indent, boolean isLast) {
+        if (expr == null) return;
+
+        String prefix = isLast ? "└── " : "├── ";
+
+        if (expr instanceof Literal lit) {
+            System.out.println(indent + prefix + "Literal: " + lit + " (line=" + lit.getLine() + ")");
+
+        } else if (expr instanceof Identifier id) {
+            System.out.println(indent + prefix + "Identifier: " + id + " (line=" + id.getLine() + ")");
+
+        } else if (expr instanceof BinaryExpr bin) {
+            System.out.println(indent + prefix + "BinaryExpr: " + bin + " (line=" + bin.getLine() + ")");
+            printExpression(bin.getLeft(), indent + (isLast ? "    " : "│   "), false);
+            printExpression(bin.getRight(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (expr instanceof UnaryExpr un) {
+            System.out.println(indent + prefix + "UnaryExpr: " + un + " (line=" + un.getLine() + ")");
+            printExpression(un.getExpr(), indent + (isLast ? "    " : "│   "), true);
+
+        } else if (expr instanceof PostfixExpr pf) {
+            System.out.println(indent + prefix + "PostfixExpr: (line=" + pf.getLine() + ")");
+            printExpression(pf.getBase(), indent + (isLast ? "    " : "│   "), false);
+            List<PostfixPart> parts = pf.getParts();
+            for (int i = 0; i < parts.size(); i++) {
+                System.out.println(indent + (isLast ? "    " : "│   ") + (i == parts.size() - 1 ? "└── " : "├── ") + "PostfixPart: " + parts.get(i));
+            }
+
+        } else {
+            System.out.println(indent + prefix + "Unknown Expression: " + expr + " (line=" + expr.getLine() + ")");
+        }
+    }
+
 
 }

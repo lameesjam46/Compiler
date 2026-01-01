@@ -1,4 +1,4 @@
-// Generated from C:/Users/dell/IdeaProjects/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/Lenovo/Desktop/Flask_Html_Jinja/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
 package JinjaGrammer;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -547,6 +547,18 @@ public interface JinjaParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLiteralId(JinjaParser.LiteralIdContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code literalDouble}
+	 * labeled alternative in {@link JinjaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteralDouble(JinjaParser.LiteralDoubleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code literalDouble}
+	 * labeled alternative in {@link JinjaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteralDouble(JinjaParser.LiteralDoubleContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code literalInt}
 	 * labeled alternative in {@link JinjaParser#primary}.
