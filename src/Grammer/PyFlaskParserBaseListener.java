@@ -137,6 +137,18 @@ public class PyFlaskParserBaseListener implements PyFlaskParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterContinueStmt(PyFlaskParser.ContinueStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitContinueStmt(PyFlaskParser.ContinueStmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprStmtNode(PyFlaskParser.ExprStmtNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -425,13 +437,25 @@ public class PyFlaskParserBaseListener implements PyFlaskParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComparison(PyFlaskParser.ComparisonContext ctx) { }
+	@Override public void enterCompareExpr(PyFlaskParser.CompareExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComparison(PyFlaskParser.ComparisonContext ctx) { }
+	@Override public void exitCompareExpr(PyFlaskParser.CompareExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIsExpr(PyFlaskParser.IsExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIsExpr(PyFlaskParser.IsExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -473,6 +497,18 @@ public class PyFlaskParserBaseListener implements PyFlaskParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInExpr(PyFlaskParser.InExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInExpr(PyFlaskParser.InExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionCall(PyFlaskParser.FunctionCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -492,6 +528,30 @@ public class PyFlaskParserBaseListener implements PyFlaskParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTernaryExpr(PyFlaskParser.TernaryExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArg(PyFlaskParser.ArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArg(PyFlaskParser.ArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArgList(PyFlaskParser.ArgListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArgList(PyFlaskParser.ArgListContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -128,6 +128,18 @@ public interface PyFlaskParserListener extends ParseTreeListener {
 	 */
 	void exitBreakStmtNode(PyFlaskParser.BreakStmtNodeContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ContinueStmt}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterContinueStmt(PyFlaskParser.ContinueStmtContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ContinueStmt}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitContinueStmt(PyFlaskParser.ContinueStmtContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code ExprStmtNode}
 	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
 	 * @param ctx the parse tree
@@ -414,17 +426,29 @@ public interface PyFlaskParserListener extends ParseTreeListener {
 	 */
 	void exitSubtraction(PyFlaskParser.SubtractionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Comparison}
+	 * Enter a parse tree produced by the {@code CompareExpr}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparison(PyFlaskParser.ComparisonContext ctx);
+	void enterCompareExpr(PyFlaskParser.CompareExprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Comparison}
+	 * Exit a parse tree produced by the {@code CompareExpr}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparison(PyFlaskParser.ComparisonContext ctx);
+	void exitCompareExpr(PyFlaskParser.CompareExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code IsExpr}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIsExpr(PyFlaskParser.IsExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code IsExpr}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIsExpr(PyFlaskParser.IsExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code AtomNumberNode}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
@@ -462,6 +486,18 @@ public interface PyFlaskParserListener extends ParseTreeListener {
 	 */
 	void exitDivision(PyFlaskParser.DivisionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code InExpr}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterInExpr(PyFlaskParser.InExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code InExpr}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitInExpr(PyFlaskParser.InExprContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code FunctionCall}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
@@ -485,4 +521,24 @@ public interface PyFlaskParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTernaryExpr(PyFlaskParser.TernaryExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyFlaskParser#arg}.
+	 * @param ctx the parse tree
+	 */
+	void enterArg(PyFlaskParser.ArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyFlaskParser#arg}.
+	 * @param ctx the parse tree
+	 */
+	void exitArg(PyFlaskParser.ArgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PyFlaskParser#argList}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgList(PyFlaskParser.ArgListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PyFlaskParser#argList}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgList(PyFlaskParser.ArgListContext ctx);
 }

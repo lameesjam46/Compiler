@@ -81,6 +81,13 @@ public interface PyFlaskParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBreakStmtNode(PyFlaskParser.BreakStmtNodeContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ContinueStmt}
+	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContinueStmt(PyFlaskParser.ContinueStmtContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ExprStmtNode}
 	 * labeled alternative in {@link PyFlaskParser#simpleStmt}.
 	 * @param ctx the parse tree
@@ -248,12 +255,19 @@ public interface PyFlaskParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSubtraction(PyFlaskParser.SubtractionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Comparison}
+	 * Visit a parse tree produced by the {@code CompareExpr}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparison(PyFlaskParser.ComparisonContext ctx);
+	T visitCompareExpr(PyFlaskParser.CompareExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IsExpr}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIsExpr(PyFlaskParser.IsExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AtomNumberNode}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
@@ -276,6 +290,13 @@ public interface PyFlaskParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDivision(PyFlaskParser.DivisionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code InExpr}
+	 * labeled alternative in {@link PyFlaskParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInExpr(PyFlaskParser.InExprContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code FunctionCall}
 	 * labeled alternative in {@link PyFlaskParser#expr}.
 	 * @param ctx the parse tree
@@ -289,4 +310,16 @@ public interface PyFlaskParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTernaryExpr(PyFlaskParser.TernaryExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyFlaskParser#arg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArg(PyFlaskParser.ArgContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PyFlaskParser#argList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArgList(PyFlaskParser.ArgListContext ctx);
 }

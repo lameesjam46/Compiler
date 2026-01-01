@@ -36,9 +36,6 @@ public class Main {
         prettyPrint(prog, "", true);
     }
 
-    /**
-     * منطق محسن للربط: بما أن الـ RouteNode تمت إضافته كـ Child داخل الـ FunctionNode
-     */
     private static void linkRoutesToFunctions(ProgramNode prog) {
         for (ASTNode node : prog.getChildren()) {
             if (node instanceof FunctionNode) {
@@ -53,9 +50,7 @@ public class Main {
         }
     }
 
-    /**
-     * ميثود الطباعة الشجرية المحسنة باستخدام رموز ASCII
-     */
+
     static void prettyPrint(ASTNode n, String prefix, boolean isLast) {
         // طباعة الرمز المناسب بناءً على موقع العقدة
         System.out.print(prefix + (isLast ? "└── " : "├── "));

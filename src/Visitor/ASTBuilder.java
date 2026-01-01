@@ -1,10 +1,10 @@
 package Visitor;
 
 import AST.*;
+import Grammer.PyFlaskLexer;
 import Grammer.PyFlaskParser;
-import Grammer.PyFlaskParser.*;
 import Grammer.PyFlaskParserBaseVisitor;
-import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.List;
@@ -60,28 +60,52 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 
 
     // ============ DECORATOR & FUNCTION ============
+//    @Override
+//    public ASTNode visitStmtDecoratedFunction(PyFlaskParser.StmtDecoratedFunctionContext ctx) {
+//        // 1. زر قاعدة الدالة أولاً للحصول على عقدة FunctionNode
+//        FunctionNode funcNode = (FunctionNode) visit(ctx.functionDef());
+//
+//        // 2. زر قاعدة الديكوريتور للحصول على عقدة RouteNode
+//        if (ctx.decorator() != null && funcNode != null) {
+//            ASTNode routeNode = visit(ctx.decorator());
+//            if (routeNode != null) {
+//                // إضافة الراوت في أول قائمة الأبناء (Index 0)
+//                funcNode.getChildren().add(0, routeNode);
+//            }
+//        }
+//
+//        // 3. أعد عقدة الدالة بعد أن أصبح الراوت بداخلها كأول ابن
+//        return funcNode;
+//    }
     @Override
     public ASTNode visitStmtDecoratedFunction(PyFlaskParser.StmtDecoratedFunctionContext ctx) {
-        // 1. زر قاعدة الدالة أولاً للحصول على عقدة FunctionNode
-        FunctionNode funcNode = (FunctionNode) visit(ctx.functionDef());
 
-        // 2. زر قاعدة الديكوريتور للحصول على عقدة RouteNode
-        if (ctx.decorator() != null && funcNode != null) {
-            ASTNode routeNode = visit(ctx.decorator());
-            if (routeNode != null) {
-                // إضافة الراوت في أول قائمة الأبناء (Index 0)
-                funcNode.getChildren().add(0, routeNode);
-            }
-        }
+        ASTNode routeNode = visit(ctx.decorator());
+        ASTNode funcNode  = visit(ctx.functionDef());
 
-        // 3. أعد عقدة الدالة بعد أن أصبح الراوت بداخلها كأول ابن
-        return funcNode;
+        // عقدة وسيطة تحفظ الترتيب
+        ASTNode wrapper = new ASTNode("DecoratedFunction", ctx.getStart().getLine()) {};
+        wrapper.addChild(routeNode);
+        wrapper.addChild(funcNode);
+
+        return wrapper;
     }
 
     @Override
     public ASTNode visitFunctionDefNode(PyFlaskParser.FunctionDefNodeContext ctx) {
         String name = ctx.ID().getText();
         FunctionNode fn = new FunctionNode(name, ctx.getStart().getLine());
+
+// PARAMETERS
+        if (ctx.parameters() != null) {
+            for (TerminalNode id : ctx.parameters().ID()) {
+                fn.addChild(new ASTNode(
+                        "Param: " + id.getText(),
+                        id.getSymbol().getLine()
+                ) {});
+            }
+        }
+
 
         // زيارة البلوك الخاص بالدالة
         if (ctx.block() != null) {
@@ -100,51 +124,72 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     // ============ CONTROL: If & For ============
     @Override
     public ASTNode visitIfStmtNode(PyFlaskParser.IfStmtNodeContext ctx) {
-        // 1. إنشاء عقدة الـ If الأساسية
-        IfNode ifNode = new IfNode(ctx.expr().getText(), ctx.getStart().getLine());
+        IfNode ifNode = new IfNode("If", ctx.getStart().getLine());
 
-        // 2. معالجة بلوك الـ If (True Branch)
-        if (ctx.block(0) != null) {
-            ASTNode mainBlock = visit(ctx.block(0));
-            if (mainBlock != null) {
-                for (ASTNode child : mainBlock.getChildren()) {
-                    ifNode.addChild(child);
-                }
-            }
+        ASTNode condition = visit(ctx.expr()); // 🔥 هنا BinaryOp is / == / in
+        ifNode.addChild(condition);
+
+        ASTNode thenBlock = visit(ctx.block(0));
+        for (ASTNode c : thenBlock.getChildren()) {
+            ifNode.addChild(c);
         }
 
-        // 3. معالجة بلوك الـ Else (False Branch) - هذا هو الجزء المفقود
-        if (ctx.block().size() > 1) { // إذا كان هناك أكثر من بلوك، فالثاني هو الـ else
-            ASTNode elseMarker = new ASTNode("Else", ctx.ELSE().getSymbol().getLine()) {};
+        if (ctx.block().size() > 1) {
+            ASTNode elseNode = new ASTNode("Else", ctx.ELSE().getSymbol().getLine()) {};
             ASTNode elseBlock = visit(ctx.block(1));
-
-            if (elseBlock != null) {
-                for (ASTNode child : elseBlock.getChildren()) {
-                    elseMarker.addChild(child);
-                }
+            for (ASTNode c : elseBlock.getChildren()) {
+                elseNode.addChild(c);
             }
-            ifNode.addChild(elseMarker); // إضافته كابن لعقدة الـ If
+            ifNode.addChild(elseNode);
         }
 
         return ifNode;
     }
+
+
+
+
+
+
     @Override
     public ASTNode visitForStmtNode(PyFlaskParser.ForStmtNodeContext ctx) {
-        // إنشاء عقدة الـ For
-        String loopInfo = ctx.ID().getText() + " in " + ctx.expr().getText();
-        ForNode forNode = new ForNode(loopInfo, ctx.getStart().getLine());
+        ASTNode forNode = new ASTNode("For", ctx.getStart().getLine()) {};
 
-        // الجزء المفقود: الدخول إلى البلوك وإضافة محتوياته (مثل الـ if) كأبناء للـ For
-        if (ctx.block() != null) {
-            ASTNode blockNode = visit(ctx.block());
-            if (blockNode != null) {
-                for (ASTNode child : blockNode.getChildren()) {
-                    forNode.addChild(child); // هنا نضيف الـ if والـ break للشجرة
-                }
+        // left: variable
+        ASTNode left = new ASTNode(
+                "Var: " + ctx.ID().getText(),
+                ctx.getStart().getLine()
+        ) {};
+
+        // right: iterable expression
+        ASTNode right = visit(ctx.expr());
+
+        // in condition
+        BinaryOpNode inCondition = new BinaryOpNode(
+                left,
+                "in",
+                right,
+                ctx.getStart().getLine()
+        );
+
+        // add condition first
+        forNode.addChild(inCondition);
+
+        // add loop body
+        ASTNode block = visit(ctx.block());
+        if (block != null) {
+            for (ASTNode stmt : block.getChildren()) {
+                forNode.addChild(stmt);
             }
         }
+
         return forNode;
     }
+
+
+
+
+
 
     // ============ STATEMENTS ============
     @Override
@@ -208,11 +253,8 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitBreakStmtNode(PyFlaskParser.BreakStmtNodeContext ctx) {
-        // إنشاء عقدة BreakNode وتمرير رقم السطر
         return new BreakNode(ctx.getStart().getLine());
     }
-
-
 
     @Override
     public ASTNode visitDictLiteralNode(PyFlaskParser.DictLiteralNodeContext ctx) {
@@ -247,6 +289,124 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
         }
         return listNode;
     }
+
+    @Override
+    public ASTNode visitContinueStmt(PyFlaskParser.ContinueStmtContext ctx) {
+        int line = ctx.CONTINUE().getSymbol().getLine();
+        return new ContinueNode(line);
+    }
+
+//    @Override
+//    public ASTNode visitAddition(PyFlaskParser.AdditionContext ctx) {
+//        ASTNode left = visit(ctx.expr(0));
+//        ASTNode right = visit(ctx.expr(1));
+//
+//        return new BinaryOpNode(
+//                left,
+//                "+",
+//                right,
+//                ctx.getStart().getLine()
+//        );
+//    }
+
+
+//
+//    @Override
+//    public ASTNode visitSubscript(PyFlaskParser.SubscriptContext ctx) {
+//        ASTNode target = visit(ctx.expr(0));
+//        ASTNode index = visit(ctx.expr(1));
+//
+//        return new SubscriptNode(target, index, ctx.getStart().getLine());
+//    }
+
+
+    @Override
+    public ASTNode visitAttribute(PyFlaskParser.AttributeContext ctx) {
+        ASTNode obj = visit(ctx.expr());
+        String attr = ctx.ID().getText();
+
+        ASTNode node = new ASTNode("Attribute: " + attr,
+                ctx.getStart().getLine()) {};
+        node.addChild(obj);
+        return node;
+    }
+
+
+
+
+    @Override
+    public ASTNode visitSubscript(PyFlaskParser.SubscriptContext ctx) {
+        // getText() يعطي: p["price"]
+        return new SubscriptNode(
+                ctx.getText(),
+                ctx.getStart().getLine()
+        );
+    }
+
+
+
+    @Override
+    public ASTNode visitInExpr(PyFlaskParser.InExprContext ctx) {
+        ASTNode left = visit(ctx.expr(0));
+        ASTNode right = visit(ctx.expr(1));
+        return new BinaryOpNode(left, "in", right, ctx.getStart().getLine());
+    }
+
+    @Override
+    public ASTNode visitIsExpr(PyFlaskParser.IsExprContext ctx) {
+        ASTNode left = visit(ctx.expr(0));
+        ASTNode right = visit(ctx.expr(1));
+        return new BinaryOpNode(left, "is", right, ctx.getStart().getLine());
+    }
+
+    @Override
+    public ASTNode visitCompareExpr(PyFlaskParser.CompareExprContext ctx) {
+        ASTNode left = visit(ctx.expr(0));
+        ASTNode right = visit(ctx.expr(1));
+        String op = ctx.getChild(1).getText();
+        return new BinaryOpNode(left, op, right, ctx.getStart().getLine());
+    }
+
+
+    @Override
+    public ASTNode visitAtomIdNode(PyFlaskParser.AtomIdNodeContext ctx) {
+        return new ASTNode(
+                "Var: " + ctx.ID().getText(),
+                ctx.ID().getSymbol().getLine()
+        ) {};
+    }
+
+
+    @Override
+    public ASTNode visitAtomNumberNode(PyFlaskParser.AtomNumberNodeContext ctx) {
+        return new ASTNode(
+                "Number: " + ctx.NUMBER().getText(),
+                ctx.NUMBER().getSymbol().getLine()
+        ) {};
+    }
+
+
+    @Override
+    public ASTNode visitAtomStringNode(PyFlaskParser.AtomStringNodeContext ctx) {
+        return new ASTNode(
+                "String: " + ctx.STRING().getText(),
+                ctx.STRING().getSymbol().getLine()
+        ) {};
+    }
+
+
+
+//    @Override
+//    public ASTNode visitSubscript(PyFlaskParser.SubscriptContext ctx) {
+//        ASTNode container = visit(ctx.expr(0));
+//        ASTNode index = visit(ctx.expr(1));
+//
+//        ASTNode node = new ASTNode("Subscript",
+//                ctx.getStart().getLine()) {};
+//        node.addChild(container);
+//        node.addChild(index);
+//        return node;
+//    }
 
 
 

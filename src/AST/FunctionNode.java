@@ -7,14 +7,17 @@ public class FunctionNode extends ASTNode {
     private List<String> bodyLines = new ArrayList<>();
 
     public FunctionNode(String name, int line) {
-        super("Function", line);
+        // نمرر الاسم الحقيقي (مثل search) للأب بدلاً من النص الثابت "Function"
+        super(name, line);
         this.name = name;
     }
 
-    public String getName() { return name; }
-    public List<String> getBodyLines() { return bodyLines; }
 
-    public void addBodyLine(String line) {
-        this.bodyLines.add(line);
+
+    public String getName() { return name; }
+    // ... باقي الكود كما هو
+    @Override
+    public String getNodeName() {
+        return "Function: "+name ;
     }
 }

@@ -30,6 +30,7 @@ lexer grammar PyFlaskLexer;
             indent += (char)c;
             _input.consume();
         }
+
         int indentLevel = indent.length();
         if (_input.LA(1) == '\r' || _input.LA(1) == '\n' || _input.LA(1) == -1) return;
 
@@ -49,6 +50,7 @@ lexer grammar PyFlaskLexer;
             }
         }
     }
+
 
     @Override
     public Token nextToken() {
@@ -111,6 +113,10 @@ RETURN  : 'return' ;
 TRUE    : 'True' ;
 FALSE   : 'False' ;
 NONE    : 'None' ;
+IS : 'is';
+AND : 'and' ;
+OR  : 'or' ;
+NOT : 'not' ;
 
 // تم تغيير NAME إلى ID ليتوافق مع الفيزيتور
 ID      : [a-zA-Z_][a-zA-Z0-9_]* ;
