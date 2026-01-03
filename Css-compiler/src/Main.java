@@ -5,7 +5,6 @@ import CSS_Symbol_Table.SymbolTable;
 import CSS_VISITOR.BuilderVisitor;
 import CSS_VISITOR.SymbolTableVisitor;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
 
 
 public class Main {

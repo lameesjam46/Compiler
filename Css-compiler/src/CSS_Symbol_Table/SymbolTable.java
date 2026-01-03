@@ -18,16 +18,31 @@ public class SymbolTable {
 
     public void print() {
         System.out.println("\n========= SYMBOL TABLE =========");
-        System.out.println("Global Scope:");
-        for (Symbol sym : globalScope.symbols.values()) {
-            System.out.println("  " + sym);
-        }
+
+        printScope("Global Scope", globalScope);
 
         for (Scope media : mediaScopes) {
-            System.out.println("\n" + media.scopeName + ":");
-            for (Symbol sym : media.symbols.values()) {
-                System.out.println("  " + sym);
-            }
+            printScope(media.scopeName, media);
         }
     }
+
+    private void printScope(String title, Scope scope) {
+        System.out.println("\n" + title + ":");
+
+        String line = "+----------------------+------------------------------------------+";
+        System.out.println(line);
+        System.out.printf("| %-20s | %-40s |\n", "Name", "Properties");
+        System.out.println(line);
+
+        for (Symbol sym : scope.symbols.values()) {
+            System.out.printf(
+                    "| %-20s | %-40s |\n",
+                    sym.name,
+                    sym.propertiesToString()
+            );
+        }
+
+        System.out.println(line);
+    }
+
 }

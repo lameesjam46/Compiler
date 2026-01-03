@@ -1,4 +1,4 @@
-// Generated from C:/Users/DELL/IdeaProjects/untitled3/src/ParserCss.g4 by ANTLR 4.13.2
+// Generated from C:/Users/DELL/IdeaProjects/untitled3/src/CSS_Antlr/ParserCss.g4 by ANTLR 4.13.2
 package CSS_Antlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -53,17 +53,101 @@ public interface ParserCssVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSimpleSelector(ParserCss.SimpleSelectorContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ParserCss#modifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModifier(ParserCss.ModifierContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ParserCss#elementName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitElementName(ParserCss.ElementNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserCss#property}.
+	 * Visit a parse tree produced by the {@code size1Property}
+	 * labeled alternative in {@link ParserCss#property}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProperty(ParserCss.PropertyContext ctx);
+	T visitSize1Property(ParserCss.Size1PropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code size2Property}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSize2Property(ParserCss.Size2PropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code textAlignProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTextAlignProperty(ParserCss.TextAlignPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code colorProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColorProperty(ParserCss.ColorPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code fontSizeProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFontSizeProperty(ParserCss.FontSizePropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code fontFamilyProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFontFamilyProperty(ParserCss.FontFamilyPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code displayProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDisplayProperty(ParserCss.DisplayPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code opacityProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpacityProperty(ParserCss.OpacityPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code borderProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBorderProperty(ParserCss.BorderPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code positionProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPositionProperty(ParserCss.PositionPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code fontWeightProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFontWeightProperty(ParserCss.FontWeightPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code backgroundProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBackgroundProperty(ParserCss.BackgroundPropertyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserCss#box_atom}.
 	 * @param ctx the parse tree

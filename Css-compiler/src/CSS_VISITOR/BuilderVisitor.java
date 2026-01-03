@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import java.util.ArrayList;
 import java.util.List;
 
- public class BuilderVisitor extends ParserCssBaseVisitor<ASTNode> {
+public class BuilderVisitor extends ParserCssBaseVisitor<ASTNode> {
 
 
     @Override
@@ -48,7 +48,7 @@ import java.util.List;
     @Override
     public ASTNode visitImportStatement(ParserCss.ImportStatementContext ctx) {
 
-         String fullText = ctx.STRING().getText();
+        String fullText = ctx.STRING().getText();
         String fileName = fullText.substring(1, fullText.length() - 1);
 
         return new ImportNode(fileName, ctx.getStart().getLine());
@@ -67,16 +67,16 @@ import java.util.List;
         return new RuleNode(selectors, properties, ctx.getStart().getLine());
     }
 
-     @Override
-     public ASTNode visitMediaRule(ParserCss.MediaRuleContext ctx) {
-         MediaNode media = new MediaNode(ctx.getStart().getLine());
+    @Override
+    public ASTNode visitMediaRule(ParserCss.MediaRuleContext ctx) {
+        MediaNode media = new MediaNode(ctx.getStart().getLine());
 
-          for (ParserCss.RuleContext r : ctx.rule_()) {
-              media.rules.add((RuleNode) visit(r));
-          }
+        for (ParserCss.RuleContext r : ctx.rule_()) {
+            media.rules.add((RuleNode) visit(r));
+        }
 
-         return media;
-     }
+        return media;
+    }
 
     @Override
     public ASTNode visitSelectorGroup(ParserCss.SelectorGroupContext ctx) {
@@ -133,9 +133,65 @@ import java.util.List;
     }
 
     @Override
-    public ASTNode visitProperty(ParserCss.PropertyContext ctx) {
-        return visit(ctx.getChild(0));
+    public ASTNode visitSize1Property(ParserCss.Size1PropertyContext ctx) {
+        return visit(ctx.size1_rule());
     }
+
+    @Override
+    public ASTNode visitSize2Property(ParserCss.Size2PropertyContext ctx) {
+        return visit(ctx.size2_rule());
+    }
+
+    @Override
+    public ASTNode visitTextAlignProperty(ParserCss.TextAlignPropertyContext ctx) {
+        return visit(ctx.textalign_rule());
+    }
+
+    @Override
+    public ASTNode visitColorProperty(ParserCss.ColorPropertyContext ctx) {
+        return visit(ctx.color_rule());
+    }
+
+    @Override
+    public ASTNode visitFontSizeProperty(ParserCss.FontSizePropertyContext ctx) {
+        return visit(ctx.font_size_rule());
+    }
+
+    @Override
+    public ASTNode visitFontFamilyProperty(ParserCss.FontFamilyPropertyContext ctx) {
+        return visit(ctx.font_family());
+    }
+
+    @Override
+    public ASTNode visitDisplayProperty(ParserCss.DisplayPropertyContext ctx) {
+        return visit(ctx.display_rule());
+    }
+
+    @Override
+    public ASTNode visitOpacityProperty(ParserCss.OpacityPropertyContext ctx) {
+        return visit(ctx.opacity_rule());
+    }
+
+    @Override
+    public ASTNode visitBorderProperty(ParserCss.BorderPropertyContext ctx) {
+        return visit(ctx.border_rule());
+    }
+
+    @Override
+    public ASTNode visitPositionProperty(ParserCss.PositionPropertyContext ctx) {
+        return visit(ctx.position_rule());
+    }
+
+    @Override
+    public ASTNode visitFontWeightProperty(ParserCss.FontWeightPropertyContext ctx) {
+        return visit(ctx.font_weight_rule());
+    }
+
+    @Override
+    public ASTNode visitBackgroundProperty(ParserCss.BackgroundPropertyContext ctx) {
+        return visit(ctx.background_rule());
+    }
+
 
     @Override
     public ASTNode visitColor_rule(ParserCss.Color_ruleContext ctx) {
@@ -230,8 +286,3 @@ import java.util.List;
 
 
 }
-
-
-
-
-

@@ -2,6 +2,7 @@ package CSS_Symbol_Table;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 public class Symbol {
     public String name;
@@ -15,8 +16,24 @@ public class Symbol {
         properties.put(propName, value);
     }
 
+    public String propertiesToString() {
+        if (properties.isEmpty()) {
+            return "-";
+        }
+
+        StringJoiner joiner = new StringJoiner(", ");
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
+            joiner.add(entry.getKey() + "=" + entry.getValue());
+        }
+        return joiner.toString();
+    }
+
     @Override
     public String toString() {
-        return "Symbol: " + name + " → " + properties;
+        return String.format(
+                "| %-20s | %-40s |",
+                name,
+                propertiesToString()
+        );
     }
 }

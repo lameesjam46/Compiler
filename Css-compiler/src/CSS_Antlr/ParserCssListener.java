@@ -1,4 +1,4 @@
-// Generated from C:/Users/DELL/IdeaProjects/untitled3/src/ParserCss.g4 by ANTLR 4.13.2
+// Generated from C:/Users/DELL/IdeaProjects/untitled3/src/CSS_Antlr/ParserCss.g4 by ANTLR 4.13.2
 package CSS_Antlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -78,6 +78,16 @@ public interface ParserCssListener extends ParseTreeListener {
 	 */
 	void exitSimpleSelector(ParserCss.SimpleSelectorContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ParserCss#modifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterModifier(ParserCss.ModifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#modifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitModifier(ParserCss.ModifierContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ParserCss#elementName}.
 	 * @param ctx the parse tree
 	 */
@@ -88,15 +98,149 @@ public interface ParserCssListener extends ParseTreeListener {
 	 */
 	void exitElementName(ParserCss.ElementNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ParserCss#property}.
+	 * Enter a parse tree produced by the {@code size1Property}
+	 * labeled alternative in {@link ParserCss#property}.
 	 * @param ctx the parse tree
 	 */
-	void enterProperty(ParserCss.PropertyContext ctx);
+	void enterSize1Property(ParserCss.Size1PropertyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ParserCss#property}.
+	 * Exit a parse tree produced by the {@code size1Property}
+	 * labeled alternative in {@link ParserCss#property}.
 	 * @param ctx the parse tree
 	 */
-	void exitProperty(ParserCss.PropertyContext ctx);
+	void exitSize1Property(ParserCss.Size1PropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code size2Property}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterSize2Property(ParserCss.Size2PropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code size2Property}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitSize2Property(ParserCss.Size2PropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code textAlignProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterTextAlignProperty(ParserCss.TextAlignPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code textAlignProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitTextAlignProperty(ParserCss.TextAlignPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code colorProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterColorProperty(ParserCss.ColorPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code colorProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitColorProperty(ParserCss.ColorPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code fontSizeProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterFontSizeProperty(ParserCss.FontSizePropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code fontSizeProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitFontSizeProperty(ParserCss.FontSizePropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code fontFamilyProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterFontFamilyProperty(ParserCss.FontFamilyPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code fontFamilyProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitFontFamilyProperty(ParserCss.FontFamilyPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code displayProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterDisplayProperty(ParserCss.DisplayPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code displayProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitDisplayProperty(ParserCss.DisplayPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code opacityProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterOpacityProperty(ParserCss.OpacityPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code opacityProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitOpacityProperty(ParserCss.OpacityPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code borderProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBorderProperty(ParserCss.BorderPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code borderProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBorderProperty(ParserCss.BorderPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code positionProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterPositionProperty(ParserCss.PositionPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code positionProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitPositionProperty(ParserCss.PositionPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code fontWeightProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterFontWeightProperty(ParserCss.FontWeightPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code fontWeightProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitFontWeightProperty(ParserCss.FontWeightPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code backgroundProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBackgroundProperty(ParserCss.BackgroundPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code backgroundProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBackgroundProperty(ParserCss.BackgroundPropertyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ParserCss#box_atom}.
 	 * @param ctx the parse tree
