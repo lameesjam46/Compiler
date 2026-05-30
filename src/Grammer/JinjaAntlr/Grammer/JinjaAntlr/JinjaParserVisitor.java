@@ -1,5 +1,5 @@
-// Generated from C:/Users/Lenovo/Desktop/Flask_Html_Jinja/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
-package Grammer.JinjaAntlr;
+// Generated from C:/Users/Lenovo/Desktop/compiler 2/Compiler/src/Grammer/JinjaAntlr/JinjaParser.g4 by ANTLR 4.13.2
+package Grammer.JinjaAntlr.Grammer.JinjaAntlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -32,12 +32,12 @@ public interface JinjaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNodeJinjaExpr(JinjaParser.NodeJinjaExprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code nodeJinjaStmt}
+	 * Visit a parse tree produced by the {@code nodeJinjaBlock}
 	 * labeled alternative in {@link JinjaParser#node}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNodeJinjaStmt(JinjaParser.NodeJinjaStmtContext ctx);
+	T visitNodeJinjaBlock(JinjaParser.NodeJinjaBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code nodeHtmlText}
 	 * labeled alternative in {@link JinjaParser#node}.
@@ -88,12 +88,12 @@ public interface JinjaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitHtmlAttr(JinjaParser.HtmlAttrContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code htmlContentBlock}
+	 * Visit a parse tree produced by the {@code htmlContentNode}
 	 * labeled alternative in {@link JinjaParser#htmlContent}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHtmlContentBlock(JinjaParser.HtmlContentBlockContext ctx);
+	T visitHtmlContentNode(JinjaParser.HtmlContentNodeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code jinjaExpression}
 	 * labeled alternative in {@link JinjaParser#jinjaExpr}.
@@ -102,110 +102,53 @@ public interface JinjaParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJinjaExpression(JinjaParser.JinjaExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaStatement}
-	 * labeled alternative in {@link JinjaParser#jinjaStmt}.
+	 * Visit a parse tree produced by {@link JinjaParser#jinjaBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaStatement(JinjaParser.JinjaStatementContext ctx);
+	T visitJinjaBlock(JinjaParser.JinjaBlockContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmtIf}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Visit a parse tree produced by the {@code blockIf}
+	 * labeled alternative in {@link JinjaParser#ifBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmtIf(JinjaParser.StmtIfContext ctx);
+	T visitBlockIf(JinjaParser.BlockIfContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmtElif}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Visit a parse tree produced by the {@code elifBlockStmt}
+	 * labeled alternative in {@link JinjaParser#elifBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmtElif(JinjaParser.StmtElifContext ctx);
+	T visitElifBlockStmt(JinjaParser.ElifBlockStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmtElse}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Visit a parse tree produced by the {@code elseBlockStmt}
+	 * labeled alternative in {@link JinjaParser#elseBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmtElse(JinjaParser.StmtElseContext ctx);
+	T visitElseBlockStmt(JinjaParser.ElseBlockStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmtFor}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Visit a parse tree produced by the {@code blockFor}
+	 * labeled alternative in {@link JinjaParser#forBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStmtFor(JinjaParser.StmtForContext ctx);
+	T visitBlockFor(JinjaParser.BlockForContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code stmtSet}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtSet(JinjaParser.StmtSetContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stmtEndIf}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtEndIf(JinjaParser.StmtEndIfContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stmtEndFor}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtEndFor(JinjaParser.StmtEndForContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stmtContinue}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtContinue(JinjaParser.StmtContinueContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code stmtBreak}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStmtBreak(JinjaParser.StmtBreakContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link JinjaParser#ifStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIfStatement(JinjaParser.IfStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code elifStatement}
-	 * labeled alternative in {@link JinjaParser#elifStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitElifStatement(JinjaParser.ElifStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code elseStatement}
-	 * labeled alternative in {@link JinjaParser#elseStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitElseStatement(JinjaParser.ElseStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link JinjaParser#forStmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitForStatement(JinjaParser.ForStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code setStatement}
+	 * Visit a parse tree produced by the {@code blockSet}
 	 * labeled alternative in {@link JinjaParser#setStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSetStatement(JinjaParser.SetStatementContext ctx);
+	T visitBlockSet(JinjaParser.BlockSetContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code blockSimple}
+	 * labeled alternative in {@link JinjaParser#jinjaSimpleStmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlockSimple(JinjaParser.BlockSimpleContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprRoot}
 	 * labeled alternative in {@link JinjaParser#expression}.

@@ -1,5 +1,6 @@
-// Generated from C:/Users/Lenovo/Desktop/Flask_Html_Jinja/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
-package Grammer.JinjaAntlr;
+// Generated from C:/Users/Lenovo/Desktop/compiler 2/Compiler/src/Grammer/JinjaAntlr/JinjaParser.g4 by ANTLR 4.13.2
+package Grammer.JinjaAntlr.Grammer.JinjaAntlr;
+
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -39,7 +40,7 @@ public class JinjaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNodeJinjaStmt(JinjaParser.NodeJinjaStmtContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNodeJinjaBlock(JinjaParser.NodeJinjaBlockContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -95,7 +96,7 @@ public class JinjaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitHtmlContentBlock(JinjaParser.HtmlContentBlockContext ctx) { return visitChildren(ctx); }
+	@Override public T visitHtmlContentNode(JinjaParser.HtmlContentNodeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -109,105 +110,49 @@ public class JinjaParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaStatement(JinjaParser.JinjaStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjaBlock(JinjaParser.JinjaBlockContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmtIf(JinjaParser.StmtIfContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBlockIf(JinjaParser.BlockIfContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmtElif(JinjaParser.StmtElifContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElifBlockStmt(JinjaParser.ElifBlockStmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmtElse(JinjaParser.StmtElseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElseBlockStmt(JinjaParser.ElseBlockStmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmtFor(JinjaParser.StmtForContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBlockFor(JinjaParser.BlockForContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmtSet(JinjaParser.StmtSetContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBlockSet(JinjaParser.BlockSetContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStmtEndIf(JinjaParser.StmtEndIfContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitStmtEndFor(JinjaParser.StmtEndForContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitStmtContinue(JinjaParser.StmtContinueContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitStmtBreak(JinjaParser.StmtBreakContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitIfStatement(JinjaParser.IfStatementContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitElifStatement(JinjaParser.ElifStatementContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitElseStatement(JinjaParser.ElseStatementContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitForStatement(JinjaParser.ForStatementContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitSetStatement(JinjaParser.SetStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBlockSimple(JinjaParser.BlockSimpleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

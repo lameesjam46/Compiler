@@ -1,6 +1,8 @@
-// Generated from C:/Users/Lenovo/Desktop/Flask_Html_Jinja/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/Lenovo/Desktop/compiler 2/Compiler/src/Grammer/JinjaAntlr/JinjaParser.g4 by ANTLR 4.13.2
 package Grammer.JinjaAntlr;
 
+import Grammer.JinjaAntlr.Grammer.JinjaAntlr.JinjaParser;
+import Grammer.JinjaAntlr.Grammer.JinjaAntlr.JinjaParserListener;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -53,13 +55,13 @@ public class JinjaParserBaseListener implements JinjaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNodeJinjaStmt(JinjaParser.NodeJinjaStmtContext ctx) { }
+	@Override public void enterNodeJinjaBlock(JinjaParser.NodeJinjaBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNodeJinjaStmt(JinjaParser.NodeJinjaStmtContext ctx) { }
+	@Override public void exitNodeJinjaBlock(JinjaParser.NodeJinjaBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -149,13 +151,13 @@ public class JinjaParserBaseListener implements JinjaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHtmlContentBlock(JinjaParser.HtmlContentBlockContext ctx) { }
+	@Override public void enterHtmlContentNode(JinjaParser.HtmlContentNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHtmlContentBlock(JinjaParser.HtmlContentBlockContext ctx) { }
+	@Override public void exitHtmlContentNode(JinjaParser.HtmlContentNodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -173,181 +175,85 @@ public class JinjaParserBaseListener implements JinjaParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaStatement(JinjaParser.JinjaStatementContext ctx) { }
+	@Override public void enterJinjaBlock(JinjaParser.JinjaBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaStatement(JinjaParser.JinjaStatementContext ctx) { }
+	@Override public void exitJinjaBlock(JinjaParser.JinjaBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtIf(JinjaParser.StmtIfContext ctx) { }
+	@Override public void enterBlockIf(JinjaParser.BlockIfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtIf(JinjaParser.StmtIfContext ctx) { }
+	@Override public void exitBlockIf(JinjaParser.BlockIfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtElif(JinjaParser.StmtElifContext ctx) { }
+	@Override public void enterElifBlockStmt(JinjaParser.ElifBlockStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtElif(JinjaParser.StmtElifContext ctx) { }
+	@Override public void exitElifBlockStmt(JinjaParser.ElifBlockStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtElse(JinjaParser.StmtElseContext ctx) { }
+	@Override public void enterElseBlockStmt(JinjaParser.ElseBlockStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtElse(JinjaParser.StmtElseContext ctx) { }
+	@Override public void exitElseBlockStmt(JinjaParser.ElseBlockStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtFor(JinjaParser.StmtForContext ctx) { }
+	@Override public void enterBlockFor(JinjaParser.BlockForContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtFor(JinjaParser.StmtForContext ctx) { }
+	@Override public void exitBlockFor(JinjaParser.BlockForContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtSet(JinjaParser.StmtSetContext ctx) { }
+	@Override public void enterBlockSet(JinjaParser.BlockSetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtSet(JinjaParser.StmtSetContext ctx) { }
+	@Override public void exitBlockSet(JinjaParser.BlockSetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStmtEndIf(JinjaParser.StmtEndIfContext ctx) { }
+	@Override public void enterBlockSimple(JinjaParser.BlockSimpleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStmtEndIf(JinjaParser.StmtEndIfContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStmtEndFor(JinjaParser.StmtEndForContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStmtEndFor(JinjaParser.StmtEndForContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStmtContinue(JinjaParser.StmtContinueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStmtContinue(JinjaParser.StmtContinueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStmtBreak(JinjaParser.StmtBreakContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStmtBreak(JinjaParser.StmtBreakContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIfStatement(JinjaParser.IfStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIfStatement(JinjaParser.IfStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterElifStatement(JinjaParser.ElifStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitElifStatement(JinjaParser.ElifStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterElseStatement(JinjaParser.ElseStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitElseStatement(JinjaParser.ElseStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterForStatement(JinjaParser.ForStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitForStatement(JinjaParser.ForStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSetStatement(JinjaParser.SetStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSetStatement(JinjaParser.SetStatementContext ctx) { }
+	@Override public void exitBlockSimple(JinjaParser.BlockSimpleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

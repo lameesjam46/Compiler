@@ -2,25 +2,26 @@ parser grammar JinjaParser;
 
 options { tokenVocab=JinjaLexer; }
 
-
+// الجذر: المستند يتكون من مجموعة من العقد
 document
     : node* EOF                              #documentRoot
     ;
 
+// العقدة قد تكون أي عنصر من العناصر التالية
 node
     : htmlElement                            #nodeHtml
     | jinjaExpr                              #nodeJinjaExpr
-    | jinjaStmt                              #nodeJinjaStmt
+    | jinjaBlock                             #nodeJinjaBlock   // تم التعديل هنا ليدعم الكتل
     | HTML_TEXT                              #nodeHtmlText
     | HTML_COMMENT                           #nodeHtmlComment
-    | HTML_DOCTYPE                            #nodeHtmlDoctype   // دعم DOCTYPE
+    | HTML_DOCTYPE                           #nodeHtmlDoctype
     ;
 
 // ======================================================
-// HTML
+// HTML STRUCTURE (Hierarchical)
 // ======================================================
 htmlElement
-    : TAG_OPEN TAG_NAME htmlAttribute* TAG_CLOSE htmlContent+ endTag    #htmlNormalElement
+    : TAG_OPEN TAG_NAME htmlAttribute* TAG_CLOSE htmlContent* endTag    #htmlNormalElement
     | TAG_OPEN TAG_NAME htmlAttribute* TAG_SLASH_CLOSE                   #htmlSelfClosingElement
     ;
 
@@ -33,70 +34,73 @@ htmlAttribute
     ;
 
 htmlContent
-    : node+                                  #htmlContentBlock
+    : node                                   #htmlContentNode
     ;
 
 // ======================================================
-// JINJA
+// JINJA STRUCTURE (Hierarchical)
 // ======================================================
+
+// تعبير جينجا {{ expr }}
 jinjaExpr
-    : JINJA_EXPR_START expression JINJA_END_EXPR
-                                              #jinjaExpression
+    : JINJA_EXPR_START expression JINJA_END_EXPR #jinjaExpression
     ;
 
-jinjaStmt
-    : JINJA_BLOCK_START stmt JINJA_END_BLOCK  #jinjaStatement
+// الكتل التي تحتوي على بداية ونهاية (Blocks)
+jinjaBlock
+    : ifBlock
+    | forBlock
+    | setStmt
+    | jinjaSimpleStmt
     ;
 
-// ---------------- statements ----------------
-stmt
-    : ifStmt                                 #stmtIf
-    | elifStmt                               #stmtElif
-    | elseStmt                               #stmtElse
-    | forStmt                                #stmtFor
-    | setStmt                                #stmtSet
-    | JINJA_ENDIF                            #stmtEndIf
-    | JINJA_ENDFOR                           #stmtEndFor
-    | JINJA_CONTINUE                         #stmtContinue
-    | JINJA_BREAK                            #stmtBreak
-    ;
+// كتلة If الكاملة مع elif و else
+ifBlock
+    : JINJA_BLOCK_START JINJA_IF expression JINJA_END_BLOCK
+        node* elifBlock*
+        elseBlock?
+      JINJA_BLOCK_START JINJA_ENDIF JINJA_END_BLOCK
+     #blockIf ;
 
-ifStmt
-    : JINJA_IF expression                    #ifStatement
-    ;
+elifBlock
+    : JINJA_BLOCK_START JINJA_ELIF expression JINJA_END_BLOCK
+        node*
+   #elifBlockStmt ;
 
-elifStmt
-    : JINJA_ELIF expression                  #elifStatement
-    ;
+elseBlock
+    : JINJA_BLOCK_START JINJA_ELSE JINJA_END_BLOCK
+        node*
+  #elseBlockStmt ;
 
-elseStmt
-    : JINJA_ELSE                             #elseStatement
-    ;
+// كتلة For الكاملة
+forBlock
+    : JINJA_BLOCK_START JINJA_FOR JINJA_ID JINJA_IN expression JINJA_END_BLOCK
+        node*
+      JINJA_BLOCK_START JINJA_ENDFOR JINJA_END_BLOCK
+     #blockFor ;
 
-forStmt
-    : JINJA_FOR JINJA_ID JINJA_IN expression #forStatement
-    ;
-
+// عبارات بسيطة لا تفتح بلوك (مثل set أو break)
 setStmt
-    : JINJA_SET JINJA_ID JINJA_ASSIGN expression
-                                              #setStatement
-    ;
+    : JINJA_BLOCK_START JINJA_SET JINJA_ID JINJA_ASSIGN expression JINJA_END_BLOCK
+     #blockSet ;
+
+jinjaSimpleStmt
+    : JINJA_BLOCK_START (JINJA_CONTINUE | JINJA_BREAK) JINJA_END_BLOCK
+    #blockSimple  ;
 
 // ======================================================
-// EXPRESSIONS
+// EXPRESSIONS (بقيت كما هي لأنها ممتازة)
 // ======================================================
 expression
     : logicalOrExpr                          #exprRoot
     ;
 
 logicalOrExpr
-    : logicalAndExpr (JINJA_OR logicalAndExpr)*
-                                              #exprOr
+    : logicalAndExpr (JINJA_OR logicalAndExpr)* #exprOr
     ;
 
 logicalAndExpr
-    : logicalNotExpr (JINJA_AND logicalNotExpr)*
-                                              #exprAnd
+    : logicalNotExpr (JINJA_AND logicalNotExpr)* #exprAnd
     ;
 
 logicalNotExpr
@@ -107,28 +111,19 @@ logicalNotExpr
 comparisonExpr
     : additiveExpr
       (
-        ( JINJA_EQ
-        | JINJA_NEQ
-        | JINJA_GT
-        | JINJA_GTE
-        | JINJA_LT
-        | JINJA_LTE
-        | JINJA_IS
-        )
+        ( JINJA_EQ | JINJA_NEQ | JINJA_GT | JINJA_GTE | JINJA_LT | JINJA_LTE | JINJA_IS )
         additiveExpr
-      )*                                     #exprCompare
+      )* #exprCompare
     ;
 
 additiveExpr
     : multiplicativeExpr
-      ((JINJA_ADD | JINJA_SUB) multiplicativeExpr)*
-                                              #exprAdd
+      ((JINJA_ADD | JINJA_SUB) multiplicativeExpr)* #exprAdd
     ;
 
 multiplicativeExpr
     : unaryExpr
-      ((JINJA_MUL | JINJA_DIV | JINJA_MOD) unaryExpr)*
-                                              #exprMul
+      ((JINJA_MUL | JINJA_DIV | JINJA_MOD) unaryExpr)* #exprMul
     ;
 
 unaryExpr
@@ -137,13 +132,13 @@ unaryExpr
     ;
 
 postfixExpr
-    : primary postfixPart*                   #exprPostfix
+    : primary postfixPart* #exprPostfix
     ;
 
 postfixPart
     : JINJA_DOT JINJA_ID                     #postfixProperty
     | JINJA_PIPE JINJA_ID                    #postfixFilter
-    | JINJA_LBRACK sliceExpr JINJA_RBRACK   #postfixIndex
+    | JINJA_LBRACK sliceExpr JINJA_RBRACK    #postfixIndex
     ;
 
 sliceExpr
@@ -161,4 +156,3 @@ primary
     | JINJA_NONE                             #literalNone
     | JINJA_LPAREN expression JINJA_RPAREN   #literalParen
     ;
-

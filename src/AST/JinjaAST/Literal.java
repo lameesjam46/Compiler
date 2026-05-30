@@ -10,6 +10,9 @@ public class Literal extends Expression {
 
     @Override
     public String toString() {
+        if (value instanceof String) {
+            return "\"" + value + "\""; // إضافة علامات التنصيص
+        }
         return String.valueOf(value);
     }
 }

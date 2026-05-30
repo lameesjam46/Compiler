@@ -1,5 +1,5 @@
-// Generated from C:/Users/Lenovo/Desktop/Flask_Html_Jinja/Compiler/src/JinjaGrammer/JinjaParser.g4 by ANTLR 4.13.2
-package Grammer.JinjaAntlr;
+// Generated from C:/Users/Lenovo/Desktop/compiler 2/Compiler/src/Grammer/JinjaAntlr/JinjaParser.g4 by ANTLR 4.13.2
+package Grammer.JinjaAntlr.Grammer.JinjaAntlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -44,17 +44,17 @@ public interface JinjaParserListener extends ParseTreeListener {
 	 */
 	void exitNodeJinjaExpr(JinjaParser.NodeJinjaExprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code nodeJinjaStmt}
+	 * Enter a parse tree produced by the {@code nodeJinjaBlock}
 	 * labeled alternative in {@link JinjaParser#node}.
 	 * @param ctx the parse tree
 	 */
-	void enterNodeJinjaStmt(JinjaParser.NodeJinjaStmtContext ctx);
+	void enterNodeJinjaBlock(JinjaParser.NodeJinjaBlockContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code nodeJinjaStmt}
+	 * Exit a parse tree produced by the {@code nodeJinjaBlock}
 	 * labeled alternative in {@link JinjaParser#node}.
 	 * @param ctx the parse tree
 	 */
-	void exitNodeJinjaStmt(JinjaParser.NodeJinjaStmtContext ctx);
+	void exitNodeJinjaBlock(JinjaParser.NodeJinjaBlockContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code nodeHtmlText}
 	 * labeled alternative in {@link JinjaParser#node}.
@@ -140,17 +140,17 @@ public interface JinjaParserListener extends ParseTreeListener {
 	 */
 	void exitHtmlAttr(JinjaParser.HtmlAttrContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code htmlContentBlock}
+	 * Enter a parse tree produced by the {@code htmlContentNode}
 	 * labeled alternative in {@link JinjaParser#htmlContent}.
 	 * @param ctx the parse tree
 	 */
-	void enterHtmlContentBlock(JinjaParser.HtmlContentBlockContext ctx);
+	void enterHtmlContentNode(JinjaParser.HtmlContentNodeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code htmlContentBlock}
+	 * Exit a parse tree produced by the {@code htmlContentNode}
 	 * labeled alternative in {@link JinjaParser#htmlContent}.
 	 * @param ctx the parse tree
 	 */
-	void exitHtmlContentBlock(JinjaParser.HtmlContentBlockContext ctx);
+	void exitHtmlContentNode(JinjaParser.HtmlContentNodeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code jinjaExpression}
 	 * labeled alternative in {@link JinjaParser#jinjaExpr}.
@@ -164,185 +164,87 @@ public interface JinjaParserListener extends ParseTreeListener {
 	 */
 	void exitJinjaExpression(JinjaParser.JinjaExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jinjaStatement}
-	 * labeled alternative in {@link JinjaParser#jinjaStmt}.
+	 * Enter a parse tree produced by {@link JinjaParser#jinjaBlock}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaStatement(JinjaParser.JinjaStatementContext ctx);
+	void enterJinjaBlock(JinjaParser.JinjaBlockContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jinjaStatement}
-	 * labeled alternative in {@link JinjaParser#jinjaStmt}.
+	 * Exit a parse tree produced by {@link JinjaParser#jinjaBlock}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaStatement(JinjaParser.JinjaStatementContext ctx);
+	void exitJinjaBlock(JinjaParser.JinjaBlockContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code stmtIf}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Enter a parse tree produced by the {@code blockIf}
+	 * labeled alternative in {@link JinjaParser#ifBlock}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtIf(JinjaParser.StmtIfContext ctx);
+	void enterBlockIf(JinjaParser.BlockIfContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code stmtIf}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Exit a parse tree produced by the {@code blockIf}
+	 * labeled alternative in {@link JinjaParser#ifBlock}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtIf(JinjaParser.StmtIfContext ctx);
+	void exitBlockIf(JinjaParser.BlockIfContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code stmtElif}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Enter a parse tree produced by the {@code elifBlockStmt}
+	 * labeled alternative in {@link JinjaParser#elifBlock}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtElif(JinjaParser.StmtElifContext ctx);
+	void enterElifBlockStmt(JinjaParser.ElifBlockStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code stmtElif}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Exit a parse tree produced by the {@code elifBlockStmt}
+	 * labeled alternative in {@link JinjaParser#elifBlock}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtElif(JinjaParser.StmtElifContext ctx);
+	void exitElifBlockStmt(JinjaParser.ElifBlockStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code stmtElse}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Enter a parse tree produced by the {@code elseBlockStmt}
+	 * labeled alternative in {@link JinjaParser#elseBlock}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtElse(JinjaParser.StmtElseContext ctx);
+	void enterElseBlockStmt(JinjaParser.ElseBlockStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code stmtElse}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Exit a parse tree produced by the {@code elseBlockStmt}
+	 * labeled alternative in {@link JinjaParser#elseBlock}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtElse(JinjaParser.StmtElseContext ctx);
+	void exitElseBlockStmt(JinjaParser.ElseBlockStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code stmtFor}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Enter a parse tree produced by the {@code blockFor}
+	 * labeled alternative in {@link JinjaParser#forBlock}.
 	 * @param ctx the parse tree
 	 */
-	void enterStmtFor(JinjaParser.StmtForContext ctx);
+	void enterBlockFor(JinjaParser.BlockForContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code stmtFor}
-	 * labeled alternative in {@link JinjaParser#stmt}.
+	 * Exit a parse tree produced by the {@code blockFor}
+	 * labeled alternative in {@link JinjaParser#forBlock}.
 	 * @param ctx the parse tree
 	 */
-	void exitStmtFor(JinjaParser.StmtForContext ctx);
+	void exitBlockFor(JinjaParser.BlockForContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code stmtSet}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmtSet(JinjaParser.StmtSetContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stmtSet}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmtSet(JinjaParser.StmtSetContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stmtEndIf}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmtEndIf(JinjaParser.StmtEndIfContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stmtEndIf}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmtEndIf(JinjaParser.StmtEndIfContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stmtEndFor}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmtEndFor(JinjaParser.StmtEndForContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stmtEndFor}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmtEndFor(JinjaParser.StmtEndForContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stmtContinue}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmtContinue(JinjaParser.StmtContinueContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stmtContinue}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmtContinue(JinjaParser.StmtContinueContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stmtBreak}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterStmtBreak(JinjaParser.StmtBreakContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stmtBreak}
-	 * labeled alternative in {@link JinjaParser#stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitStmtBreak(JinjaParser.StmtBreakContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link JinjaParser#ifStmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterIfStatement(JinjaParser.IfStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link JinjaParser#ifStmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitIfStatement(JinjaParser.IfStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code elifStatement}
-	 * labeled alternative in {@link JinjaParser#elifStmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterElifStatement(JinjaParser.ElifStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code elifStatement}
-	 * labeled alternative in {@link JinjaParser#elifStmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitElifStatement(JinjaParser.ElifStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code elseStatement}
-	 * labeled alternative in {@link JinjaParser#elseStmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterElseStatement(JinjaParser.ElseStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code elseStatement}
-	 * labeled alternative in {@link JinjaParser#elseStmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitElseStatement(JinjaParser.ElseStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link JinjaParser#forStmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterForStatement(JinjaParser.ForStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link JinjaParser#forStmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitForStatement(JinjaParser.ForStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code setStatement}
+	 * Enter a parse tree produced by the {@code blockSet}
 	 * labeled alternative in {@link JinjaParser#setStmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterSetStatement(JinjaParser.SetStatementContext ctx);
+	void enterBlockSet(JinjaParser.BlockSetContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code setStatement}
+	 * Exit a parse tree produced by the {@code blockSet}
 	 * labeled alternative in {@link JinjaParser#setStmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitSetStatement(JinjaParser.SetStatementContext ctx);
+	void exitBlockSet(JinjaParser.BlockSetContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code blockSimple}
+	 * labeled alternative in {@link JinjaParser#jinjaSimpleStmt}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlockSimple(JinjaParser.BlockSimpleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code blockSimple}
+	 * labeled alternative in {@link JinjaParser#jinjaSimpleStmt}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlockSimple(JinjaParser.BlockSimpleContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code exprRoot}
 	 * labeled alternative in {@link JinjaParser#expression}.
