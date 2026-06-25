@@ -1,4 +1,4 @@
- package APP.JinjaApp;
+ package app.JinjaApp;
 
 import AST.JinjaAST.*;
 import Visitor.jinjaVisitor.ASTBuilderVisitor;

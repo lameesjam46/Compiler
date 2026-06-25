@@ -1,4 +1,4 @@
-package APP.AppCss;
+package app.AppCss;
 
 import AST.CSS_AST.StyleNode;
 import Grammer.CSSAntlr.LexerCss;
