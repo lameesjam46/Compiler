@@ -1,22 +1,24 @@
 package SymbolTable.SymbolTablejinja;
-public class Symbol {
-    private final String name;
-    private final String type; // parameter, local, loop
-    private final int line;
 
-    public Symbol(String name, String type, int line) {
+public class Symbol {
+    public enum SymbolType {
+        SET_VAR,
+        LOOP_VAR,
+        BUILT_IN,
+        FUNCTION, // تأكد من وجود هذه القيمة
+        VARIABLE
+    }
+
+    private String name;
+    private SymbolType type;
+    private int line;
+
+    public Symbol(String name, SymbolType type, int line) {
         this.name = name;
         this.type = type;
         this.line = line;
     }
 
     public String getName() { return name; }
-    public String getType() { return type; }
-    public int getLine() { return line; }
-
-    @Override
-    public String toString() {
-        return name + " : " + type + " (line=" + line + ")";
-    }
+    public SymbolType getType() { return type; }
 }
-

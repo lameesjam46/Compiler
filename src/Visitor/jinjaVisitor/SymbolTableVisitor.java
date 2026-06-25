@@ -1,7 +1,8 @@
 package Visitor.jinjaVisitor;
 
-import Grammer.JinjaAntlr.JinjaParser;
-import Grammer.JinjaAntlr.JinjaParserBaseVisitor;
+import Grammer.JinjaAntlr.Grammer.JinjaAntlr.JinjaParser;
+import Grammer.JinjaAntlr.Grammer.JinjaAntlr.JinjaParserBaseVisitor;
+import SymbolTable.SymbolTablejinja.Symbol;
 import SymbolTable.SymbolTablejinja.SymbolTable;
 
 public class SymbolTableVisitor extends JinjaParserBaseVisitor<Void> {
@@ -9,42 +10,38 @@ public class SymbolTableVisitor extends JinjaParserBaseVisitor<Void> {
     private final SymbolTable symbolTable;
 
     public SymbolTableVisitor() {
-        symbolTable = new SymbolTable();
+        this.symbolTable = new SymbolTable();
     }
 
     public SymbolTable getSymbolTable() {
         return symbolTable;
     }
 
-
     @Override
-    public Void visitSetStatement(JinjaParser.SetStatementContext ctx) {
-
+    public Void visitBlockSet(JinjaParser.BlockSetContext ctx) {
         String varName = ctx.JINJA_ID().getText();
         int line = ctx.getStart().getLine();
-        symbolTable.addSymbol(varName, "local", line);
+
+        symbolTable.addSymbol(varName, Symbol.SymbolType.SET_VAR, line);
 
         return visitChildren(ctx);
     }
 
-
-
-
     @Override
-    public Void visitForStatement(JinjaParser.ForStatementContext ctx) {
+    public Void visitBlockFor(JinjaParser.BlockForContext ctx) {
         String loopVar = ctx.JINJA_ID().getText();
         int line = ctx.getStart().getLine();
 
+        symbolTable.enterScope("ForLoop_" + line);
 
-        symbolTable.enterScope("ForLoop: " + loopVar + " in ...");
-        symbolTable.addSymbol(loopVar, "loop", line);
+        symbolTable.addSymbol(loopVar, Symbol.SymbolType.LOOP_VAR, line);
+        symbolTable.addSymbol("loop", Symbol.SymbolType.VARIABLE, line);
 
         visitChildren(ctx);
 
         symbolTable.exitScope();
         return null;
     }
-
 
     @Override
     public Void visitLiteralId(JinjaParser.LiteralIdContext ctx) {
@@ -52,33 +49,19 @@ public class SymbolTableVisitor extends JinjaParserBaseVisitor<Void> {
         int line = ctx.getStart().getLine();
 
         if (symbolTable.lookup(varName) == null) {
-            symbolTable.addSymbol(varName, "parameter", line);
+            symbolTable.addSymbol(varName, Symbol.SymbolType.VARIABLE, line);
         }
         return visitChildren(ctx);
     }
 
 
     @Override
-    public Void visitIfStatement(JinjaParser.IfStatementContext ctx) {
-        symbolTable.enterScope("IfBlock");
+    public Void visitBlockIf(JinjaParser.BlockIfContext ctx) {
+        symbolTable.enterScope("IfBlock_" + ctx.getStart().getLine());
         visitChildren(ctx);
         symbolTable.exitScope();
         return null;
     }
 
-    @Override
-    public Void visitElifStatement(JinjaParser.ElifStatementContext ctx) {
-        symbolTable.enterScope("ElifBlock");
-        visitChildren(ctx);
-        symbolTable.exitScope();
-        return null;
-    }
 
-    @Override
-    public Void visitElseStatement(JinjaParser.ElseStatementContext ctx) {
-        symbolTable.enterScope("ElseBlock");
-        visitChildren(ctx);
-        symbolTable.exitScope();
-        return null;
-    }
 }

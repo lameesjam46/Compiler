@@ -1,29 +1,46 @@
 package SymbolTable.SymbolTablejinja;
+
 import java.util.*;
 
 public class Scope {
     private final String name;
-    private final Map<String, Symbol> symbols;
+    private final Scope parent;
+    private final Map<String, Symbol> symbols = new HashMap<>();
 
-    public Scope(String name) {
+    public Scope(String name, Scope parent) {
         this.name = name;
-        this.symbols = new LinkedHashMap<>();
+        this.parent = parent;
     }
 
-    public void addSymbol(String name, String type, int line) {
-        symbols.put(name, new Symbol(name, type, line));
+    public boolean containsLocally(String name) {
+        return symbols.containsKey(name);
+    }
+
+    public void addSymbol(Symbol s) {
+        symbols.put(s.getName(), s);
     }
 
     public Symbol lookup(String name) {
         return symbols.get(name);
     }
 
-    public void printScope() {
-        System.out.println("Scope: " + name);
-        for (Symbol s : symbols.values()) {
-            System.out.println("  " + s);
-        }
+    public Scope getParent() {
+        return parent;
+    }
+    public Set<String> getSymbolsNames() {
+        return symbols.keySet();
+    }
+    public String getName() {
+        return name;
     }
 
-    public String getName() { return name; }
+    public void printSymbols() {
+        for (Symbol s : symbols.values()) {
+            System.out.println("  - " + s.getName() + " : " + s.getType());
+        }
+    }
+    @Override
+    public String toString() {
+        return name + " { symbols=" + symbols.keySet() + " }";
+    }
 }
