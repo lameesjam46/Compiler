@@ -34,9 +34,20 @@ importList
     : ID (COMMA ID)* # ImportListNode
     ;
 
+
+
+
+decoratorExpr
+    : ID                                      # DecName
+    | decoratorExpr DOT ID                    # DecAttribute
+    | decoratorExpr LPAREN argList? RPAREN    # DecCall
+    ;
+
+
+
 // ============ DECORATOR ============
 decorator
-    : ATSIGN expr                         # DecoratorNode
+    : ATSIGN decoratorExpr                # DecoratorNode
     ;
 
 // ============ FUNCTION ============

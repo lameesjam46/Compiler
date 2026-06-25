@@ -1,4 +1,4 @@
-// Generated from C:/Users/dell/IdeaProjects/Compiler/src/Grammer/PyFlaskParser.g4 by ANTLR 4.13.2
+// Generated from D:/compiler_2/Compiler/src/Grammer/PaythonGrammer/PyFlaskParser.g4 by ANTLR 4.13.2
 package Grammer.PaythonGrammer;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -192,6 +192,42 @@ public class PyFlaskParserBaseListener implements PyFlaskParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitImportListNode(PyFlaskParser.ImportListNodeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecAttribute(PyFlaskParser.DecAttributeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecAttribute(PyFlaskParser.DecAttributeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecName(PyFlaskParser.DecNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecName(PyFlaskParser.DecNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDecCall(PyFlaskParser.DecCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDecCall(PyFlaskParser.DecCallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

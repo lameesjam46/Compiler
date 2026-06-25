@@ -1,11 +1,6 @@
 package SymbolTable.SymbolFlask;
 
-
-//import AST.*;
 import AST.PaythonAST.*;
-import SymbolTable.SymbolFlask.Scope;
-import SymbolTable.SymbolFlask.Symbol;
-import SymbolTable.SymbolFlask.SymbolKind;
 
 public class SymbolTableBuilder {
 
@@ -26,19 +21,17 @@ public class SymbolTableBuilder {
         }
         else if (node.getNodeName() != null && node.getNodeName().startsWith("Param:")) {
             String paramName = node.getNodeName().replace("Param:", "").trim();
-            currentScope.define(new Symbol(paramName, "PARAMETER", node.getLineno()));
+            currentScope.define(new Symbol(paramName, SymbolKind.PARAMETER.toString(), node.getLineno()));
         }
         else if (node.getNodeName() != null && node.getNodeName().startsWith("Assignment:")) {
             visitAssignment(node);
         }
-        else if (node.getNodeName() != null && node.getNodeName().startsWith("Var:")) {
-            String varName = node.getNodeName().replace("Var:", "").trim();
-            currentScope.define(new Symbol(varName, "LOOP_VARIABLE", node.getLineno()));
-        }
         else if (node instanceof IfNode) {
             visitIf((IfNode) node);
         }
-
+        else if (node instanceof ForNode) {
+            visitFor((ForNode) node);
+        }
         else {
             if (node.getChildren() != null) {
                 for (ASTNode c : node.getChildren()) {
@@ -48,11 +41,9 @@ public class SymbolTableBuilder {
         }
     }
 
-
     private void visitAssignment(ASTNode node) {
         String name = node.getNodeName().replace("Assignment:", "").trim();
-
-        String kind = "VARIABLE";
+        String kind = SymbolKind.VARIABLE.toString();
 
         if (insideIf) {
             kind = SymbolKind.IF_VARIABLE.toString();
@@ -67,15 +58,6 @@ public class SymbolTableBuilder {
         }
     }
 
-    private void visitProgram(ProgramNode node) {
-        if (node.getChildren() != null) {
-            for (ASTNode c : node.getChildren()) {
-                visit(c);
-            }
-        }
-    }
-
-
     private void visitIf(IfNode node) {
         boolean saved = insideIf;
         insideIf = true;
@@ -89,11 +71,11 @@ public class SymbolTableBuilder {
         insideIf = saved;
     }
 
-
     private void visitFunction(FunctionNode node) {
-        String funcName = node.getNodeName();
+        // 🛠️ تم التعديل هنا: تنظيف اسم الدالة من النص الزائد "Function:" لتبسيط وتجميل المخرجات
+        String funcName = node.getNodeName().replace("Function:", "").trim();
 
-        Symbol funcSym = new Symbol(funcName, "FUNCTION", node.getLineno());
+        Symbol funcSym = new Symbol(funcName, SymbolKind.FUNCTION.toString(), node.getLineno());
         currentScope.define(funcSym);
 
         Scope saved = currentScope;
@@ -108,8 +90,17 @@ public class SymbolTableBuilder {
 
         currentScope = saved;
     }
+
     private void visitFor(ForNode node) {
-        String varName = node.getNodeName().replace("Var:", "").trim();
+        String varName = "unknown";
+
+        if (node.getChildren() != null && !node.getChildren().isEmpty()) {
+            ASTNode varNode = node.getChildren().get(0);
+            if (varNode.getNodeName() != null && varNode.getNodeName().startsWith("Var:")) {
+                varName = varNode.getNodeName().replace("Var:", "").trim();
+            }
+        }
+
         currentScope.define(new Symbol(
                 varName,
                 SymbolKind.LOOP_VARIABLE.toString(),
@@ -120,13 +111,11 @@ public class SymbolTableBuilder {
         currentScope = new Scope("ForScope", saved);
 
         if (node.getChildren() != null) {
-            for (ASTNode c : node.getChildren()) {
-                visit(c);
+            for (int i = 1; i < node.getChildren().size(); i++) {
+                visit(node.getChildren().get(i));
             }
         }
 
         currentScope = saved;
     }
-
-
 }

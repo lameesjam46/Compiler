@@ -215,13 +215,45 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitDecoratorNode(PyFlaskParser.DecoratorNodeContext ctx) {
-        // استخراج النص الكامل للتعبير بعد علامة @
-        // ctx.expr().getText() سيعطيك شيئاً مثل app.route("/products")
-        String path = "@" + ctx.expr().getText();
-
-        // إنشاء عقدة RouteNode جديدة
-        return new RouteNode(path, ctx.getStart().getLine());
+        // نقوم بعمل visit للـ decoratorExpr الجديد بدلاً من getText العشوائي
+        ASTNode decExpr = visit(ctx.decoratorExpr());
+        RouteNode node = new RouteNode("@", ctx.getStart().getLine());
+        node.addChild(decExpr);
+        return node;
     }
+
+
+
+    @Override
+    public ASTNode visitDecName(PyFlaskParser.DecNameContext ctx) {
+        return new ASTNode("DecName: " + ctx.ID().getText(), ctx.getStart().getLine()) {};
+    }
+
+    @Override
+    public ASTNode visitDecAttribute(PyFlaskParser.DecAttributeContext ctx) {
+        ASTNode parent = visit(ctx.decoratorExpr());
+        ASTNode node = new ASTNode("DecAttribute: " + ctx.ID().getText(), ctx.getStart().getLine()) {};
+        node.addChild(parent);
+        return node;
+    }
+
+    @Override
+    public ASTNode visitDecCall(PyFlaskParser.DecCallContext ctx) {
+        ASTNode target = visit(ctx.decoratorExpr());
+        ASTNode node = new ASTNode("DecCall", ctx.getStart().getLine()) {};
+        node.addChild(target);
+
+        // 🛠️ تم الإصلاح: نقوم بزيارة الـ argList وسحب الـ URL الممرر بداخلها
+        if (ctx.argList() != null) {
+            ASTNode argListNode = visit(ctx.argList());
+            if (argListNode != null) {
+                node.addChild(argListNode);
+            }
+        }
+        return node;
+    }
+
+
 
 
     @Override
@@ -283,14 +315,7 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 //    }
 
 
-//
-//    @Override
-//    public ASTNode visitSubscript(PyFlaskParser.SubscriptContext ctx) {
-//        ASTNode target = visit(ctx.expr(0));
-//        ASTNode index = visit(ctx.expr(1));
-//
-//        return new SubscriptNode(target, index, ctx.getStart().getLine());
-//    }
+
 
 
     @Override
@@ -306,14 +331,15 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 
 
 
-
     @Override
     public ASTNode visitSubscript(PyFlaskParser.SubscriptContext ctx) {
-        // getText() يعطي: p["price"]
-        return new SubscriptNode(
-                ctx.getText(),
-                ctx.getStart().getLine()
-        );
+        ASTNode target = visit(ctx.expr(0)); // الكائن المراد الوصول له (المصفوفة أو القاموس)
+        ASTNode index = visit(ctx.expr(1));  // الفهرس أو المفتاح الممرر
+
+        ASTNode node = new ASTNode("Subscript", ctx.getStart().getLine()) {};
+        node.addChild(target);
+        node.addChild(index);
+        return node;
     }
 
 
@@ -369,27 +395,85 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitAddition(PyFlaskParser.AdditionContext ctx) {
-        return super.visitAddition(ctx);
+        ASTNode left = visit(ctx.expr(0));
+        ASTNode right = visit(ctx.expr(1));
+        return new BinaryOpNode(left, "+", right, ctx.getStart().getLine());
     }
 
-//    @Override
-//    public ASTNode visitSubscript(PyFlaskParser.SubscriptContext ctx) {
-//        ASTNode container = visit(ctx.expr(0));
-//        ASTNode index = visit(ctx.expr(1));
-//
-//        ASTNode node = new ASTNode("Subscript",
-//                ctx.getStart().getLine()) {};
-//        node.addChild(container);
-//        node.addChild(index);
-//        return node;
-//    }
+    @Override
+    public ASTNode visitSubtraction(PyFlaskParser.SubtractionContext ctx) {
+        ASTNode left = visit(ctx.expr(0));
+        ASTNode right = visit(ctx.expr(1));
+        return new BinaryOpNode(left, "-", right, ctx.getStart().getLine());
+    }
+
+    @Override
+    public ASTNode visitMultiplication(PyFlaskParser.MultiplicationContext ctx) {
+        ASTNode left = visit(ctx.expr(0));
+        ASTNode right = visit(ctx.expr(1));
+        return new BinaryOpNode(left, "*", right, ctx.getStart().getLine());
+    }
+
+    @Override
+    public ASTNode visitDivision(PyFlaskParser.DivisionContext ctx) {
+        ASTNode left = visit(ctx.expr(0));
+        ASTNode right = visit(ctx.expr(1));
+        return new BinaryOpNode(left, "/", right, ctx.getStart().getLine());
+    }
+
+
+
+    @Override
+    public ASTNode visitTrueLit(PyFlaskParser.TrueLitContext ctx) {
+        return new ASTNode("Boolean: True", ctx.getStart().getLine()) {};
+    }
+
+    @Override
+    public ASTNode visitFalseLit(PyFlaskParser.FalseLitContext ctx) {
+        return new ASTNode("Boolean: False", ctx.getStart().getLine()) {};
+    }
+
+    @Override
+    public ASTNode visitNoneLit(PyFlaskParser.NoneLitContext ctx) {
+        return new ASTNode("Literal: None", ctx.getStart().getLine()) {};
+    }
+
+
+    @Override
+    public ASTNode visitParens(PyFlaskParser.ParensContext ctx) {
+        // الأقواس في الـ AST مجرد حاوية، نقوم بالدخول مباشرة للتعبير الداخلي وإرجاعه
+        return visit(ctx.expr());
+    }
 
 
 
 
-//    @Override
-//    public ASTNode visitContinueStmtNode(PyFlaskParser.ContinueStmtNodeContext ctx) {
-//        // اختيارياً: إذا أردت دعم Continue أيضاً
-//        return new ASTNode("Continue", ctx.getStart().getLine()) {};
-//    }
+    @Override
+    public ASTNode visitArgList(PyFlaskParser.ArgListContext ctx) {
+        ASTNode argListNode = new ASTNode("ArgList", ctx.getStart().getLine()) {};
+        if (ctx.arg() != null) {
+            for (PyFlaskParser.ArgContext argCtx : ctx.arg()) {
+                ASTNode childArg = visit(argCtx);
+                if (childArg != null) argListNode.addChild(childArg);
+            }
+        }
+        return argListNode;
+    }
+
+    @Override
+    public ASTNode visitArg(PyFlaskParser.ArgContext ctx) {
+        // إذا كان معامل عادي (مثل نص الـ URL الصافي)
+        if (ctx.expr() != null) {
+            return visit(ctx.expr());
+        }
+        // إذا كان معامل مسمى (مثل methods=["GET", "POST"])
+        if (ctx.ID() != null && ctx.expr() != null) {
+            ASTNode argNode = new ArgNode(ctx.ID().getText(), ctx.getStart().getLine());
+            argNode.addChild(visit(ctx.expr()));
+            return argNode;
+        }
+        return null;
+    }
+
+
 }

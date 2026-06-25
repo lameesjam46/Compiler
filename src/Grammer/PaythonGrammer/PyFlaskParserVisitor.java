@@ -1,4 +1,4 @@
-// Generated from C:/Users/dell/IdeaProjects/Compiler/src/Grammer/PyFlaskParser.g4 by ANTLR 4.13.2
+// Generated from D:/compiler_2/Compiler/src/Grammer/PaythonGrammer/PyFlaskParser.g4 by ANTLR 4.13.2
 package Grammer.PaythonGrammer;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -115,6 +115,27 @@ public interface PyFlaskParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitImportListNode(PyFlaskParser.ImportListNodeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DecAttribute}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecAttribute(PyFlaskParser.DecAttributeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DecName}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecName(PyFlaskParser.DecNameContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DecCall}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDecCall(PyFlaskParser.DecCallContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code DecoratorNode}
 	 * labeled alternative in {@link PyFlaskParser#decorator}.

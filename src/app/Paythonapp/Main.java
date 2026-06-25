@@ -1,4 +1,4 @@
-package APP.Paythonapp;
+package app.Paythonapp;
 
 import AST.PaythonAST.*;
 import Grammer.PaythonGrammer.PyFlaskLexer;
@@ -6,6 +6,7 @@ import Grammer.PaythonGrammer.PyFlaskParser;
 import SymbolTable.SymbolFlask.Scope;
 import SymbolTable.SymbolFlask.SymbolTableBuilder;
 import Visitor.PaythonVisitor.ASTBuilder;
+import SemanticAnalyzer.FlaskSemanticAnalyzer;
 import org.antlr.v4.runtime.*;
 
 import java.util.List;
@@ -32,11 +33,23 @@ public class Main {
 
         System.out.println("=== Abstract Syntax Tree Structure ===");
         prettyPrint(prog, "", true);
+
         SymbolTableBuilder symBuilder = new SymbolTableBuilder();
         Scope globalScope = symBuilder.build(prog);
 
         System.out.println("\n=== Symbol Table ===");
         globalScope.print("");
+
+        // ============================================================
+        // 🛠️ الفحص الدلالي الجديد (Flask Semantic Analysis)
+        // ============================================================
+        System.out.println("\n=== Starting Semantic Analysis ===");
+
+        FlaskSemanticAnalyzer semanticAnalyzer = new FlaskSemanticAnalyzer();
+        semanticAnalyzer.check(prog, globalScope); // تشغيل الفحص
+
+        System.out.println("=== Semantic Analysis Finished ===");
+        // ============================================================
 
     }
 
@@ -55,13 +68,9 @@ public class Main {
 
 
     static void prettyPrint(ASTNode n, String prefix, boolean isLast) {
-        // طباعة الرمز المناسب بناءً على موقع العقدة
         System.out.print(prefix + (isLast ? "└── " : "├── "));
-
-        // طباعة نوع العقدة ورقم السطر
         System.out.print(n.getNodeName() + " (line=" + n.getLineno() + ")");
 
-        // طباعة تفاصيل إضافية بجانب الاسم
         if (n instanceof ImportNode) {
             ImportNode in = (ImportNode) n;
             System.out.print(" -> module: " + in.getModule());

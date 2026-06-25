@@ -23,31 +23,41 @@ lexer grammar PyFlaskLexer;
     }
 
     void checkSpace() {
-        int count = 0;
-        while (_input.LA(1) == ' '  _input.LA(1) == '\t') {
-            count++;
-            _input.consume();
-        }
+            int count = 0;
 
-        int next = _input.LA(1);
-        if (next == '\r'  next == '\n' || next == -1) return;
+            // قمنا بفصل الشرط في متغير مستقل لتجنب مشاكل الأقواس أثناء التوليد
+            while (true) {
+                int currentLA = _input.LA(1);
+                if (currentLA == ' ' || currentLA == '\t') {
+                    count++;
+                    _input.consume();
+                } else {
+                    break;
+                }
+            }
 
-        int last = stack.isEmpty() ? 0 : stack.peek();
+            int next = _input.LA(1);
+            // صياغة صريحة ومفصّلة ليفهمها الـ Compiler بدون أي لبس
+            if (next == '\r' || next == '\n' || next == -1) {
+                return;
+            }
 
-        if (needBlock) {
-            stack.push(count);
-            queue.add(makeToken(BLOCKSTART, "<BLOCKSTART>"));
-            needBlock = false;
-        } else if (count > last) {
-            stack.push(count);
-            queue.add(makeToken(BLOCKSTART, "<BLOCKSTART>"));
-        } else {
-            while (!stack.isEmpty() && stack.peek() > count) {
-                stack.pop();
-                queue.add(makeToken(BLOCKEND, "<BLOCKEND>"));
+            int last = stack.isEmpty() ? 0 : stack.peek();
+
+            if (needBlock) {
+                stack.push(count);
+                queue.add(makeToken(BLOCKSTART, "<BLOCKSTART>"));
+                needBlock = false;
+            } else if (count > last) {
+                stack.push(count);
+                queue.add(makeToken(BLOCKSTART, "<BLOCKSTART>"));
+            } else {
+                while (!stack.isEmpty() && stack.peek() > count) {
+                    stack.pop();
+                    queue.add(makeToken(BLOCKEND, "<BLOCKEND>"));
+                }
             }
         }
-    }
 
     @Override
     public Token nextToken() {

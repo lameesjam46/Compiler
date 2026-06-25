@@ -1,4 +1,4 @@
-// Generated from C:/Users/dell/IdeaProjects/Compiler/src/Grammer/PyFlaskParser.g4 by ANTLR 4.13.2
+// Generated from D:/compiler_2/Compiler/src/Grammer/PaythonGrammer/PyFlaskParser.g4 by ANTLR 4.13.2
 package Grammer.PaythonGrammer;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -187,6 +187,42 @@ public interface PyFlaskParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitImportListNode(PyFlaskParser.ImportListNodeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DecAttribute}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecAttribute(PyFlaskParser.DecAttributeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DecAttribute}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecAttribute(PyFlaskParser.DecAttributeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DecName}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecName(PyFlaskParser.DecNameContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DecName}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecName(PyFlaskParser.DecNameContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DecCall}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterDecCall(PyFlaskParser.DecCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DecCall}
+	 * labeled alternative in {@link PyFlaskParser#decoratorExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitDecCall(PyFlaskParser.DecCallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code DecoratorNode}
 	 * labeled alternative in {@link PyFlaskParser#decorator}.

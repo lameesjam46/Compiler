@@ -1,7 +1,5 @@
 package Grammer.CSSAntlr;
 
-import Grammer.CSSAntlr.LexerCss;
-import Grammer.CSSAntlr.ParserCss;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
