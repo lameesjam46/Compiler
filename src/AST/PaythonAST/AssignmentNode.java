@@ -1,15 +1,13 @@
 package AST.PaythonAST;
 
 public class AssignmentNode extends ASTNode {
-    private String left;
-    private String right;
 
-    public AssignmentNode(String left, String right, int line) {
+    public AssignmentNode(ASTNode left, ASTNode right, int line) {
         super("Assignment", line);
-        this.left = left;
-        this.right = right;
+        this.addChild(left);    // child 0 = الطرف الأيسر (متغير أو Subscript أو Attribute)
+        this.addChild(right);   // child 1 = القيمة
     }
 
-    public String getLeft() { return left; }
-    public String getRight() { return right; }
+    public ASTNode getLeft()  { return getChildren().get(0); }
+    public ASTNode getRight() { return getChildren().get(1); }
 }

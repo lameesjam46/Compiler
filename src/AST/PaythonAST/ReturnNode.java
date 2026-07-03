@@ -1,15 +1,9 @@
 package AST.PaythonAST;
 
 public class ReturnNode extends ASTNode {
-
-    private String value;
-
-    public ReturnNode(String value, Integer lineno) {
+    public ReturnNode(ASTNode value, Integer lineno) {
         super("Return", lineno);
-        this.value = value;
+        this.addChild(value);
     }
-
-    public String getValue() {
-        return value;
-    }
+    public ASTNode getValue() { return getChildren().isEmpty() ? null : getChildren().get(0); }
 }

@@ -7,10 +7,18 @@ import java.util.regex.*;
 public class FlaskSemanticAnalyzer {
 
     private Scope globalScope;
+    // 1. تعريف متغيّر علم لمراقبة وجود أخطاء دلالية أثناء الفحص
+    private boolean hasSemanticErrors = false;
 
     public void check(ASTNode root, Scope globalScope) {
         this.globalScope = globalScope;
+        this.hasSemanticErrors = false; // إعادة تهيئة العلم قبل البدء
         visit(root);
+    }
+
+    // 2. ميثود عامة ترجع حالة الفحص ليقرأها ملف Main.java
+    public boolean hasErrors() {
+        return this.hasSemanticErrors;
     }
 
     private void visit(ASTNode node) {
@@ -45,6 +53,9 @@ public class FlaskSemanticAnalyzer {
                                 Symbol paramSym = funcSym.getInnerScope().resolve(flaskVar);
 
                                 if (paramSym == null || !paramSym.getKind().equals(SymbolKind.PARAMETER.toString())) {
+                                    // 3. رفع العلم وتثبيت حدوث خطأ دلالي فور رصده
+                                    this.hasSemanticErrors = true;
+
                                     System.err.println("\n [Flask Semantic Error]: Missing Flask Variable!");
                                     System.err.println("   -> In Route URL: \"" + routeText + "\"");
                                     System.err.println("   -> The URL variable <" + flaskVar + "> is missing from function '" + funcName + "' parameters.");

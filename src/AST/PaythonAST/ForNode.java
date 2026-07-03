@@ -3,19 +3,18 @@ package AST.PaythonAST;
 public class ForNode extends ASTNode {
 
     private String variable;
-    private String iterable;
 
-    public ForNode(String variable, Integer lineno) {
-        super("For", lineno);
+    public ForNode(String variable, ASTNode iterable, Integer lineno) {
+        super("For: " + variable, lineno);
         this.variable = variable;
-        this.iterable = iterable;
+        this.addChild(iterable);   // الـ iterable صار child حقيقي، مش String ضايع
     }
 
     public String getVariable() {
         return variable;
     }
 
-    public String getIterable() {
-        return iterable;
+    public ASTNode getIterable() {
+        return getChildren().isEmpty() ? null : getChildren().get(0);
     }
 }

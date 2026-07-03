@@ -103,7 +103,7 @@ def add_product():
 # حذف منتج
 # =========================
 @app.route("/delete/<int:pid>")
-def delete_product():
+def delete_product(pid):
     index = -1
 
     for i in range(len(products)):
