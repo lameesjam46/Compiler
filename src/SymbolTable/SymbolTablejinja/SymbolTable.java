@@ -68,4 +68,12 @@ public class SymbolTable {
         return closedScopeVariables.contains(name);
     }
 
+    public boolean isBuiltIn(String name) {
+        return builtIns.containsKey(name);
+    }
+
+    public boolean isDefined(String name) {
+        return lookup(name) != null;
+    }
+
 }

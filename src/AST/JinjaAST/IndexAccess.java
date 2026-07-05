@@ -16,6 +16,14 @@ public class IndexAccess extends PostfixPart {
                 this.end = end;
         }
 
+        public Expression getStart() {
+                return start;
+        }
+
+        public Expression getEnd() {
+                return end;
+        }
+
         @Override
         public String toString() {
                 if (end != null) {

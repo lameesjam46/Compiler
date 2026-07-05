@@ -6,6 +6,7 @@ import java.util.*;
 public class SemanticAnalyzer {
     private final SymbolTable symbolTable;
     private final List<String> scopeErrors = new ArrayList<>();
+    private final Set<String> reportedErrors = new HashSet<>();
 
     public SemanticAnalyzer(SymbolTable symbolTable) { this.symbolTable = symbolTable; }
 
@@ -28,9 +29,7 @@ public class SemanticAnalyzer {
         }
         else if (node instanceof IfStmt) {
            // visitIfStmt((IfStmt) node);
-            System.out.println("DEBUG: Entering IF block...");
             visitIfStmt((IfStmt) node);
-            System.out.println("DEBUG: Exited IF block.");
         }
         // استخدام اسم الكلاس الصحيح في مشروعك
         else if (node instanceof JinjaExpression) {
@@ -67,8 +66,6 @@ public class SemanticAnalyzer {
         }
         checkExpressionScope(node.getIterable());
         symbolTable.enterScope("ForBlock");
-        System.out.println("DEBUG: بعد الدخول للسكوب الفرعي:");
-        symbolTable.printReport(); // طباعة الجدول هنا ستظهر لك السكوبات المتداخلة
 
         symbolTable.addSymbol(node.getVar(), Symbol.SymbolType.LOOP_VAR, node.getLine());
         for (Node child : node.getBody()) visit(child);
@@ -82,11 +79,22 @@ public class SemanticAnalyzer {
         if (expr instanceof Identifier) {
             String name = ((Identifier) expr).getName();
             if (symbolTable.wasDefinedInClosedScope(name)) {
-                scopeErrors.add("Scope Error: Variable '" + name + "' used out of scope at line " + expr.getLine());
+                addError("Scope Error: Variable '" + name + "' used out of scope at line " + expr.getLine());
+            }
+            else if (!symbolTable.isDefined(name)) {
+                addError("Semantic Error [Undefined Variable]: Variable '" + name + "' is not defined at line " + expr.getLine());
             }
         }
         else if (expr instanceof PostfixExpr) {
-            checkExpressionScope(((PostfixExpr) expr).getBase());
+            PostfixExpr postfix = (PostfixExpr) expr;
+            checkExpressionScope(postfix.getBase());
+            for (PostfixPart part : postfix.getParts()) {
+                if (part instanceof IndexAccess) {
+                    IndexAccess index = (IndexAccess) part;
+                    checkExpressionScope(index.getStart());
+                    checkExpressionScope(index.getEnd());
+                }
+            }
         }
         else if (expr instanceof BinaryExpr) { // الاسم الصحيح هو BinaryExpr
             BinaryExpr bin = (BinaryExpr) expr;
@@ -95,6 +103,12 @@ public class SemanticAnalyzer {
         }
         else if (expr instanceof UnaryExpr) {
             checkExpressionScope(((UnaryExpr) expr).getExpr());
+        }
+    }
+
+    private void addError(String message) {
+        if (reportedErrors.add(message)) {
+            scopeErrors.add(message);
         }
     }
 
