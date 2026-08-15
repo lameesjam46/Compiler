@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Phone - تفاصيل المنتج</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<header class="app-bar">
+    <h1><a href="/" class="logo-link">متجر المنتجات</a></h1>
+    <nav class="nav-links">
+        <a href="/">الرئيسية</a>
+        <a href="/products">كل المنتجات</a>
+        <a href="/add">إضافة منتج</a>
+        <a href="/search">بحث</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="product-detail-card">
+        <h2>Phone</h2>
+        <p class="price">100$</p>
+        <p class="details">Smart phone</p>
+
+        <div class="actions">
+            <a href="/delete/{{ product.id }}" class="btn-delete">حذف المنتج</a>
+            <a href="/products" class="btn-back">رجوع لكل المنتجات</a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="app-footer">
+    <p>مشروع المترجمات 2025/2026</p>
+</footer>
+
+</body>
+</html>

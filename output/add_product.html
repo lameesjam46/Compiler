@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>إضافة منتج</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="app-bar">
+    <h1><a href="index.html" class="logo-link">متجر المنتجات</a></h1>
+    <nav class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">كل المنتجات</a>
+        <a href="add_product.html">إضافة منتج</a>
+        <a href="search.html">بحث</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h2>إضافة منتج جديد</h2>
+
+    <form method="POST" action="add_product.html" class="product-form">
+
+        <label for="name">اسم المنتج</label>
+        <!--<!-- تم تعديل required لتصبح required="required" -->-->
+        <input type="text" id="name" name="name" required="required" />
+
+        <label for="price">السعر</label>
+        <!--<!-- تم تعديل required لتصبح required="required" -->-->
+        <input type="number" id="price" name="price" step="0.01" required="required" />
+
+        <label for="details">التفاصيل</label>
+        <!--<!-- تم تعديل required لتصبح required="required" -->-->
+        <textarea id="details" name="details" rows="4" required="required"></textarea>
+
+        <label for="image">اسم صورة المنتج</label>
+        <input type="text" id="image" name="image" placeholder="مثال: phone.jpg" />
+
+        <button type="submit" class="btn-submit">إضافة المنتج</button>
+
+    </form>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

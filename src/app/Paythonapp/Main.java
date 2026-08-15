@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-
+//        Integrator.OutputManager.prepareOutputStructure();
         String path = "Input/flask_app.py";
         CharStream cs = CharStreams.fromFileName(path);
 

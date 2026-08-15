@@ -2,6 +2,9 @@ package SemanticAnalyzer;
 
 import AST.PaythonAST.*;
 import SymbolTable.SymbolFlask.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*;
 
 public class FlaskSemanticAnalyzer {
@@ -10,15 +13,30 @@ public class FlaskSemanticAnalyzer {
     // 1. تعريف متغيّر علم لمراقبة وجود أخطاء دلالية أثناء الفحص
     private boolean hasSemanticErrors = false;
 
+    // ============================================================
+    // تعديل: أضفنا لائحة نصية لتخزين نفس رسائل الأخطاء يلي كانت
+    // تُطبع فقط بالتيرمينال (System.err.println)، بدون ما نغيّر
+    // أي سلوك موجود — الطباعة تضل تماماً متل ما هي. هلق فقط صار
+    // فينا نسترجع الأخطاء برمجيًا (getErrors())، لبناء
+    // semantic_report.txt الحقيقي بمجلد compiler_output/.
+    // ============================================================
+    private final List<String> errors = new ArrayList<>();
+
     public void check(ASTNode root, Scope globalScope) {
         this.globalScope = globalScope;
         this.hasSemanticErrors = false; // إعادة تهيئة العلم قبل البدء
+        this.errors.clear();
         visit(root);
     }
 
     // 2. ميثود عامة ترجع حالة الفحص ليقرأها ملف Main.java
     public boolean hasErrors() {
         return this.hasSemanticErrors;
+    }
+
+    /** لائحة نصية بكل الأخطاء الدلالية المرصودة — تستخدم لبناء semantic_report.txt */
+    public List<String> getErrors() {
+        return errors;
     }
 
     private void visit(ASTNode node) {
@@ -55,6 +73,11 @@ public class FlaskSemanticAnalyzer {
                                 if (paramSym == null || !paramSym.getKind().equals(SymbolKind.PARAMETER.toString())) {
                                     // 3. رفع العلم وتثبيت حدوث خطأ دلالي فور رصده
                                     this.hasSemanticErrors = true;
+
+                                    String message = "Missing Flask Variable: URL variable <" + flaskVar
+                                            + "> in route \"" + routeText + "\" is missing from function '"
+                                            + funcName + "' parameters (line " + funcNode.getLineno() + ")";
+                                    this.errors.add(message);
 
                                     System.err.println("\n [Flask Semantic Error]: Missing Flask Variable!");
                                     System.err.println("   -> In Route URL: \"" + routeText + "\"");

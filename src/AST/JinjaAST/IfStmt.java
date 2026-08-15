@@ -17,11 +17,34 @@ public class IfStmt extends Stmt {
 
     public Expression getCondition() { return condition; }
     public List<Node> getThenBranch() { return thenBranch; }
-    public List<ElifStmt> getElifBlocks() { return elifBlocks; } // تمت الإضافة
-    public ElseStmt getElseBlock() { return elseBlock; }       // تمت الإضافة
+    public List<ElifStmt> getElifBlocks() { return elifBlocks; }
+    public ElseStmt getElseBlock() { return elseBlock; }
 
     @Override
     public String toString() {
-        return "if " + condition;
+        // ============================================================
+        // تعديل: كانت هاي الدالة بترجع بس "if " + condition، متجاهلة
+        // thenBranch وelifBlocks وelseBlock بالكامل، وبدون أقواس
+        // {% %}. صرنا نبني النص الكامل: {% if %} + المحتوى + كل
+        // elif + else؟ + {% endif %} — بالضبط بنية القاعدة النحوية.
+        // ============================================================
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{% if ").append(condition).append(" %}");
+        for (Node n : thenBranch) {
+            sb.append(n);
+        }
+
+        for (ElifStmt elif : elifBlocks) {
+            sb.append(elif);
+        }
+
+        if (elseBlock != null) {
+            sb.append(elseBlock);
+        }
+
+        sb.append("{% endif %}");
+
+        return sb.toString();
     }
 }

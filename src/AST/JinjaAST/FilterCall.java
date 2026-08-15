@@ -8,6 +8,11 @@ public class FilterCall extends PostfixPart {
         this.filter = filter;
     }
 
+    // إضافة: getter ضروري لتطبيق الفلتر فعليًا وقت التنفيذ الحقيقي
+    public String getFilter() {
+        return filter;
+    }
+
     @Override
     public String toString() {
         return "|" + filter;

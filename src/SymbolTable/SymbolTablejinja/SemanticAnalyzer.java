@@ -14,7 +14,6 @@ public class SemanticAnalyzer {
     }
 
     private void visit(Node node) {
-        // System.out.println("Visiting node: " + node.getClass().getSimpleName() + " at line " + node.getLine());
         if (node instanceof SetStmt) {
             SetStmt s = (SetStmt) node;
             checkExpressionScope(s.getValue());
@@ -24,13 +23,9 @@ public class SemanticAnalyzer {
         }
         else if (node instanceof ForStmt) {
             visitForStmt((ForStmt) node);
-
         }
         else if (node instanceof IfStmt) {
-           // visitIfStmt((IfStmt) node);
-            System.out.println("DEBUG: Entering IF block...");
             visitIfStmt((IfStmt) node);
-            System.out.println("DEBUG: Exited IF block.");
         }
         // استخدام اسم الكلاس الصحيح في مشروعك
         else if (node instanceof JinjaExpression) {
@@ -67,8 +62,6 @@ public class SemanticAnalyzer {
         }
         checkExpressionScope(node.getIterable());
         symbolTable.enterScope("ForBlock");
-        System.out.println("DEBUG: بعد الدخول للسكوب الفرعي:");
-        symbolTable.printReport(); // طباعة الجدول هنا ستظهر لك السكوبات المتداخلة
 
         symbolTable.addSymbol(node.getVar(), Symbol.SymbolType.LOOP_VAR, node.getLine());
         for (Node child : node.getBody()) visit(child);

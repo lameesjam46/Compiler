@@ -1,15 +1,49 @@
-<div>
-    <h1>Add Product</h1>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>إضافة منتج</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
 
-    <form>
-        <input>
-        <input>
-        <input>
+<header class="app-bar">
+    <h1><a href="/" class="logo-link">متجر المنتجات</a></h1>
+    <nav class="nav-links">
+        <a href="/">الرئيسية</a>
+        <a href="/products">كل المنتجات</a>
+        <a href="/add">إضافة منتج</a>
+        <a href="/search">بحث</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h2>إضافة منتج جديد</h2>
+
+    <form method="POST" action="/add" class="product-form">
+
+        <label for="name">اسم المنتج</label>
+        <!-- تم تعديل required لتصبح required="required" -->
+        <input type="text" id="name" name="name" required="required" />
+
+        <label for="price">السعر</label>
+        <!-- تم تعديل required لتصبح required="required" -->
+        <input type="number" id="price" name="price" step="0.01" required="required" />
+
+        <label for="details">التفاصيل</label>
+        <!-- تم تعديل required لتصبح required="required" -->
+        <textarea id="details" name="details" rows="4" required="required"></textarea>
+
+        <label for="image">اسم صورة المنتج</label>
+        <input type="text" id="image" name="image" placeholder="مثال: phone.jpg" />
+
+        <button type="submit" class="btn-submit">إضافة المنتج</button>
+
     </form>
-</div>
 
-<style>
-    form {
-        border: solid;
-    }
-</style>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -27,7 +27,7 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     public ASTNode visitFromImportStmt(PyFlaskParser.FromImportStmtContext ctx) {
         List<String> moduleParts = new ArrayList<>();
         for (int i = 0; i < ctx.getChildCount(); i++) {
-            if (ctx.getChild(i) == ctx.importList()) break; // وقفنا قبل ما نوصل للـ importList
+            if (ctx.getChild(i) == ctx.importList()) break;
             if (ctx.getChild(i) instanceof TerminalNode) {
                 String text = ctx.getChild(i).getText();
                 if (!text.equals("from") && !text.equals("import") && !text.equals(".")) {
@@ -48,7 +48,6 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
         return new ImportNode(null, names, ctx.getStart().getLine());
     }
 
-    // مساعد: يسحب كل الأسماء من importList بدون الاعتماد على ID() المباشرة
     private List<String> extractImportNames(PyFlaskParser.ImportListContext importListCtx) {
         List<String> names = new ArrayList<>();
         if (importListCtx == null) return names;
@@ -123,7 +122,6 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     }
 
     // ============ FOR ============
-    // تعديل: صرنا نستخدم ForNode الحقيقية، والـ iterable بيصير child فعلي بدل String ضايع
     @Override
     public ASTNode visitForStmtNode(PyFlaskParser.ForStmtNodeContext ctx) {
         String variable = ctx.ID().getText();
@@ -133,14 +131,13 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 
         ASTNode block = visit(ctx.block());
         if (block != null) {
-            forNode.addChild(block); // child index 1 = البلوك (index 0 = الـ iterable)
+            forNode.addChild(block);
         }
 
         return forNode;
     }
 
     // ============ ASSIGNMENT ============
-    // تعديل: AssignmentNode صارت تاخد ASTNode مباشرة بدل ما نبني عقدة مجهولة
     @Override
     public ASTNode visitAssignStmtNode(PyFlaskParser.AssignStmtNodeContext ctx) {
         ASTNode left  = visit(ctx.expr(0));
@@ -149,7 +146,6 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     }
 
     // ============ RETURN ============
-    // ملاحظة: هاد بيفترض إنك عدّلتي ReturnNode تاخد ASTNode بدل String (شوفي التنويه تحت)
     @Override
     public ASTNode visitReturnStmtNode(PyFlaskParser.ReturnStmtNodeContext ctx) {
         ASTNode value;
@@ -162,7 +158,6 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     }
 
     // ============ BLOCK ============
-    // ملاحظة: هاد بيفترض إنك ضفتي كلاس BlockNode (شوفي التنويه تحت)
     @Override
     public ASTNode visitBlockNode(PyFlaskParser.BlockNodeContext ctx) {
         BlockNode block = new BlockNode(ctx.getStart().getLine());
@@ -179,7 +174,6 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     }
 
     // ============ TERNARY ============
-    // تعديل: صرنا نمشي على الشجرة فعليًا (visit) بدل الاعتماد على getText() النصي
     @Override
     public ASTNode visitTernaryExpr(PyFlaskParser.TernaryExprContext ctx) {
         ASTNode trueValue  = visit(ctx.expr(0));
@@ -238,18 +232,31 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     }
 
     // ============ DICT / LIST LITERALS ============
+    // ============================================================
+    // تعديل: كانت هاي الدوال ببني عقد ASTNode عامة بأسماء نصية
+    // ("Dictionary Structure", "Field: id") بدل استخدام الكلاسات
+    // الحقيقية DictNode/ListNode/DictEntryNode المعرّفة أصلاً
+    // بالمشروع (وكانت موجودة بس غير مستخدمة، تمامًا متل VOID_TAGS
+    // بجانب Jinja). صرنا نستخدمها فعليًا، عشان DataBridge (وأي كود
+    // لاحق) يقدر يتعامل معها بـ instanceof نوعي وواضح، بدل تحليل
+    // نصوص هش (fragile string parsing). هاد التعديل مقصود ومقبول
+    // رغم كسر التوافق مع PythonCodeGenerator (round-trip)، لأنه
+    // الأخير تمرين أكاديمي إضافي فقط ومش جزء من خط التسليم الرسمي
+    // (الدكتور حدد إنه "Generator" الحقيقي بيطلّع Context Data،
+    // مش كود Python من جديد).
+    // ============================================================
     @Override
     public ASTNode visitDictLiteralNode(PyFlaskParser.DictLiteralNodeContext ctx) {
-        ASTNode dictNode = new ASTNode("Dictionary Structure", ctx.getStart().getLine()) {};
+        DictNode dictNode = new DictNode(ctx.getStart().getLine());
 
         List<TerminalNode> keys = ctx.STRING();
         List<PyFlaskParser.ExprContext> values = ctx.expr();
 
         for (int i = 0; i < keys.size(); i++) {
             String keyName = keys.get(i).getText().replace("\"", "");
-            ASTNode keyNode = new ASTNode("Field: " + keyName, keys.get(i).getSymbol().getLine()) {};
-            keyNode.addChild(visit(values.get(i)));
-            dictNode.addChild(keyNode);
+            ASTNode value = visit(values.get(i));
+            DictEntryNode entry = new DictEntryNode(keyName, value, keys.get(i).getSymbol().getLine());
+            dictNode.addChild(entry);
         }
 
         return dictNode;
@@ -257,7 +264,7 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitListLiteralNode(PyFlaskParser.ListLiteralNodeContext ctx) {
-        ASTNode listNode = new ASTNode("List Structure", ctx.getStart().getLine()) {};
+        ListNode listNode = new ListNode(ctx.getStart().getLine());
         for (PyFlaskParser.ExprContext expr : ctx.expr()) {
             listNode.addChild(visit(expr));
         }
@@ -287,7 +294,6 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     }
 
     // ============ FUNCTION CALL ============
-    // جديد: هاي كانت مفقودة بالكامل. بدونها ولا استدعاء دالة واحد كان رح يتبنى بالشجرة
     @Override
     public ASTNode visitFunctionCall(PyFlaskParser.FunctionCallContext ctx) {
         ASTNode function = visit(ctx.expr());
@@ -409,11 +415,9 @@ public class ASTBuilder extends PyFlaskParserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitArg(PyFlaskParser.ArgContext ctx) {
         if (ctx.ID() != null) {
-            // معامل مسمى: methods=["GET","POST"] أو products=products
             ASTNode value = visit(ctx.expr());
             return new KeywordArgNode(ctx.ID().getText(), value, ctx.getStart().getLine());
         }
-        // معامل عادي بدون اسم
         return visit(ctx.expr());
     }
 }

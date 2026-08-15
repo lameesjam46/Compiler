@@ -2,7 +2,7 @@ package AST.JinjaAST;
 import java.util.List;
 
 public class ElseStmt extends Stmt {
-    private final List<Node> body; // إضافة الـ body
+    private final List<Node> body;
 
     public ElseStmt(int line, List<Node> body) {
         super(line);
@@ -13,9 +13,13 @@ public class ElseStmt extends Stmt {
 
     @Override
     public String toString() {
+        // تعديل: أضفنا أقواس {% else %} — بدون endif هون كمان،
+        // لأنه {% endif %} تبع IfStmt الأم هو يلي بيسكّر الكل.
         StringBuilder sb = new StringBuilder();
-        sb.append("else\n");
-        for (Node n : body) sb.append(n.toString());
+        sb.append("{% else %}");
+        for (Node n : body) {
+            sb.append(n);
+        }
         return sb.toString();
     }
 }

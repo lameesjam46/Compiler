@@ -7,6 +7,8 @@ public class BreakStmt extends Stmt {
 
     @Override
     public String toString() {
-        return "break";
+        // تعديل: أضفنا أقواس {% %} — كانت بترجع "break" بس، وهاد مش
+        // Jinja صحيح (كان رح ينطبع كنص HTML عادي بالناتج).
+        return "{% break %}";
     }
 }

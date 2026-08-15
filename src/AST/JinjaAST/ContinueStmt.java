@@ -7,6 +7,7 @@ public class ContinueStmt extends Stmt {
 
     @Override
     public String toString() {
-        return "continue";
+        // تعديل: نفس تعديل BreakStmt — إضافة أقواس {% %}.
+        return "{% continue %}";
     }
 }

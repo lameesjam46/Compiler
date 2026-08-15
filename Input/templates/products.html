@@ -1,9 +1,56 @@
-<div>
-    <h1>Product Details</h1>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>كل المنتجات</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
 
-    {% if product %}
-    <div>
-        {{ product }}
-    </div>
+<header class="app-bar">
+    <h1><a href="/" class="logo-link">متجر المنتجات</a></h1>
+    <nav class="nav-links">
+        <a href="/">الرئيسية</a>
+        <a href="/products">كل المنتجات</a>
+        <a href="/add">إضافة منتج</a>
+        <a href="/search">بحث</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h2>كل المنتجات</h2>
+    <p>العدد: {{ count }}</p>
+
+    {% if count > 0 %}
+    <table class="products-table">
+        <thead>
+        <tr>
+            <th>الاسم</th>
+            <th>السعر</th>
+            <th>التفاصيل</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.price }}$</td>
+            <td>{{ p.details }}</td>
+            <td><a href="/product/{{ p.id }}" class="btn-details">تفاصيل</a></td>
+            <td><a href="/delete/{{ p.id }}" class="btn-delete">حذف</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="empty-state">لا يوجد منتجات بعد.</p>
     {% endif %}
-</div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

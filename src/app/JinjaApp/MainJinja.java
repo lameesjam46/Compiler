@@ -1,4 +1,4 @@
- package APP.JinjaApp;
+package APP.JinjaApp;
 
 import AST.JinjaAST.*;
 import Grammer.JinjaAntlr.Grammer.JinjaAntlr.JinjaLexer;
@@ -17,7 +17,7 @@ public class MainJinja {
 
     public static void main(String[] args) throws Exception {
 
-        String filename = "src/Input/templates/add_product.html";
+        String filename = "Input/templates/jinja_parser_test.html";
         CharStream cs = CharStreams.fromFileName(filename);
         JinjaLexer lexer = new JinjaLexer(cs);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -32,6 +32,11 @@ public class MainJinja {
         System.out.println("      Abstract Syntax Tree (AST) Structure    ");
         System.out.println("==============================================");
         printNode(ast, "", true);
+
+        System.out.println("\n==============================================");
+        System.out.println("      Generated Output (Round-trip)           ");
+        System.out.println("==============================================");
+        System.out.println(ast.toString());
 
         SymbolTable symbolTable = new SymbolTable();
 
@@ -82,14 +87,59 @@ public class MainJinja {
             System.out.println(indent + prefix + "Jinja Output {{...}}" + lineInfo);
             printExpression(je.getExpr(), indent + (isLast ? "    " : "│   "), true);
         } else if (node instanceof IfStmt ifStmt) {
+            // ============================================================
+            // تعديل: كانت هاي الكتلة بتطبع بس thenBranch وتتجاهل
+            // elifBlocks و elseBlock كليًا، رغم إنهم موجودين وجاهزين
+            // بالكائن (getElifBlocks() / getElseBlock()). صرنا نحسب
+            // كل الفروع المتوفرة فعليًا (then + elif* + else؟) عشان
+            // نعرف مين هو "آخر فرع" ونرسم خطوط الشجرة صح (└── vs ├──).
+            // ============================================================
             System.out.println(indent + prefix + "IF Statement" + lineInfo);
             String childIndent = indent + (isLast ? "    " : "│   ");
+
             System.out.println(childIndent + "├── Condition");
             printExpression(ifStmt.getCondition(), childIndent + "│   ", true);
-            System.out.println(childIndent + "└── Body");
+
+            boolean hasElif = !ifStmt.getElifBlocks().isEmpty();
+            boolean hasElse = ifStmt.getElseBlock() != null;
+            boolean thenIsLastBranch = !hasElif && !hasElse;
+
+            // ---- Then Branch ----
+            System.out.println(childIndent + (thenIsLastBranch ? "└── " : "├── ") + "Then Body");
+            String thenIndent = childIndent + (thenIsLastBranch ? "    " : "│   ");
             for (int i = 0; i < ifStmt.getThenBranch().size(); i++) {
-                printNode(ifStmt.getThenBranch().get(i), childIndent + "    ", i == ifStmt.getThenBranch().size() - 1);
+                printNode(ifStmt.getThenBranch().get(i), thenIndent, i == ifStmt.getThenBranch().size() - 1);
             }
+
+            // ---- Elif Branches (جديد) ----
+            List<ElifStmt> elifs = ifStmt.getElifBlocks();
+            for (int e = 0; e < elifs.size(); e++) {
+                boolean thisElifIsLast = (e == elifs.size() - 1) && !hasElse;
+                ElifStmt elif = elifs.get(e);
+
+                System.out.println(childIndent + (thisElifIsLast ? "└── " : "├── ") + "ELIF" + " (line=" + elif.getLine() + ")");
+                String elifIndent = childIndent + (thisElifIsLast ? "    " : "│   ");
+
+                System.out.println(elifIndent + "├── Condition");
+                printExpression(elif.getCondition(), elifIndent + "│   ", true);
+
+                System.out.println(elifIndent + "└── Body");
+                List<Node> body = elif.getBody();
+                for (int i = 0; i < body.size(); i++) {
+                    printNode(body.get(i), elifIndent + "    ", i == body.size() - 1);
+                }
+            }
+
+            // ---- Else Branch (جديد) ----
+            if (hasElse) {
+                System.out.println(childIndent + "└── ELSE" + " (line=" + ifStmt.getElseBlock().getLine() + ")");
+                String elseIndent = childIndent + "    ";
+                List<Node> body = ifStmt.getElseBlock().getBody();
+                for (int i = 0; i < body.size(); i++) {
+                    printNode(body.get(i), elseIndent, i == body.size() - 1);
+                }
+            }
+
         } else if (node instanceof ForStmt fs) {
             System.out.println(indent + prefix + "FOR Loop (var: " + fs.getVar() + ")" + lineInfo);
             String childIndent = indent + (isLast ? "    " : "│   ");

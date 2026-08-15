@@ -15,10 +15,23 @@ public class ForStmt extends Stmt {
 
     public String getVar() { return var; }
     public List<Node> getBody() { return body; }
-    public Expression getIterable() { return iterable; } // تمت الإضافة
+    public Expression getIterable() { return iterable; }
 
     @Override
     public String toString() {
-        return "for " + var + " in " + iterable;
+        // ============================================================
+        // تعديل: كانت هاي الدالة بترجع بس "for var in iterable"،
+        // متجاهلة body بالكامل، وبدون {% %}/{% endfor %}. صرنا نبني
+        // النص الكامل: {% for %} + محتوى الحلقة + {% endfor %}.
+        // ============================================================
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{% for ").append(var).append(" in ").append(iterable).append(" %}");
+        for (Node n : body) {
+            sb.append(n);
+        }
+        sb.append("{% endfor %}");
+
+        return sb.toString();
     }
 }

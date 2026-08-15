@@ -1,0 +1,207 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+    background: #f5f6fa;
+    color: #2d2d2d;
+    line-height: 1.6;
+}
+
+/* ===== Header ===== */
+.app-bar {
+    background: #2c3e50;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo-link {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* ===== Layout ===== */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.app-footer {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-size: 13px;
+}
+
+/* ===== Hero ===== */
+.hero {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* ===== Product Grid / Cards ===== */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    width: 220px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.product-card .price {
+    color: #27ae60;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.btn-details, .btn-back, .btn-submit {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-details:hover, .btn-submit:hover {
+    background: #2980b9;
+}
+
+.btn-delete {
+    display: inline-block;
+    background: #e74c3c;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+
+/* ===== Table ===== */
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.products-table th, .products-table td {
+    padding: 12px 14px;
+    text-align: right;
+    border-bottom: 1px solid #eee;
+}
+
+.products-table th {
+    background: #ecf0f1;
+}
+
+/* ===== Product Detail Card ===== */
+.product-detail-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.product-detail-card .actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* ===== Forms ===== */
+.product-form, .search-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 500px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.search-form {
+    flex-direction: row;
+    align-items: center;
+}
+
+.product-form input, .product-form textarea, .search-form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* ===== Misc ===== */
+.empty-state {
+    color: #888;
+    padding: 15px;
+}
+
+.search-info {
+    margin: 15px 0;
+    color: #555;
+}
+
+/* ===== Price Badges (elif demo) ===== */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin: 6px 0;
+}
+
+.badge-expensive {
+    background: #fdecea;
+    color: #e74c3c;
+}
+
+.badge-medium {
+    background: #fff6e0;
+    color: #d68910;
+}
+
+.badge-cheap {
+    background: #eafaf1;
+    color: #27ae60;
+}

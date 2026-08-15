@@ -12,7 +12,7 @@ import org.antlr.v4.runtime.*;
 public class Main {
     public static void main(String[] args) throws Exception {
 //  هاد ملف التيست تبعي
-        String css ="Input/inputCss/test.txt";
+        String css ="Input/static/css/style.css";
 
 
         CharStream sc = CharStreams.fromFileName(css);

@@ -1,0 +1,351 @@
+{
+  "type": "Program",
+  "line": 1,
+  "children": [
+    {
+      "type": "HtmlDoctype",
+      "value": "<!DOCTYPE html>",
+      "line": 1
+    },
+    {
+      "type": "HtmlElement",
+      "tag": "html",
+      "line": 2,
+      "children": [
+        {
+          "type": "HtmlElement",
+          "tag": "head",
+          "line": 3,
+          "children": [
+            {
+              "type": "HtmlElement",
+              "tag": "meta",
+              "line": 4,
+              "children": []
+            },
+            {
+              "type": "HtmlElement",
+              "tag": "title",
+              "line": 5,
+              "children": [
+                {
+                  "type": "HtmlText",
+                  "text": "الرئيسية - متجر المنتجات",
+                  "line": 5
+                }
+              ]
+            },
+            {
+              "type": "HtmlElement",
+              "tag": "link",
+              "line": 6,
+              "children": []
+            }
+          ]
+        },
+        {
+          "type": "HtmlElement",
+          "tag": "body",
+          "line": 8,
+          "children": [
+            {
+              "type": "HtmlElement",
+              "tag": "header",
+              "line": 10,
+              "children": [
+                {
+                  "type": "HtmlElement",
+                  "tag": "h1",
+                  "line": 11,
+                  "children": [
+                    {
+                      "type": "HtmlElement",
+                      "tag": "a",
+                      "line": 11,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "متجر المنتجات",
+                          "line": 11
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "HtmlElement",
+                  "tag": "nav",
+                  "line": 12,
+                  "children": [
+                    {
+                      "type": "HtmlElement",
+                      "tag": "a",
+                      "line": 13,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "الرئيسية",
+                          "line": 13
+                        }
+                      ]
+                    },
+                    {
+                      "type": "HtmlElement",
+                      "tag": "a",
+                      "line": 14,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "كل المنتجات",
+                          "line": 14
+                        }
+                      ]
+                    },
+                    {
+                      "type": "HtmlElement",
+                      "tag": "a",
+                      "line": 15,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "إضافة منتج",
+                          "line": 15
+                        }
+                      ]
+                    },
+                    {
+                      "type": "HtmlElement",
+                      "tag": "a",
+                      "line": 16,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "بحث",
+                          "line": 16
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "HtmlElement",
+              "tag": "main",
+              "line": 20,
+              "children": [
+                {
+                  "type": "SetStmt",
+                  "var": "count",
+                  "value": "products|length",
+                  "line": 22
+                },
+                {
+                  "type": "HtmlElement",
+                  "tag": "section",
+                  "line": 24,
+                  "children": [
+                    {
+                      "type": "HtmlElement",
+                      "tag": "h2",
+                      "line": 25,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "أهلاً فيكِ",
+                          "line": 25
+                        }
+                      ]
+                    },
+                    {
+                      "type": "HtmlElement",
+                      "tag": "p",
+                      "line": 26,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "عدد المنتجات: ",
+                          "line": 26
+                        },
+                        {
+                          "type": "JinjaExpression",
+                          "expr": "count",
+                          "line": 26
+                        }
+                      ]
+                    },
+                    {
+                      "type": "HtmlElement",
+                      "tag": "p",
+                      "line": 27,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "متوسط سعر المنتجات: ",
+                          "line": 27
+                        },
+                        {
+                          "type": "JinjaExpression",
+                          "expr": "avg_price",
+                          "line": 27
+                        },
+                        {
+                          "type": "HtmlText",
+                          "text": "$",
+                          "line": 27
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "IfStmt",
+                  "condition": "count > 0",
+                  "line": 30,
+                  "then": [
+                    {
+                      "type": "HtmlElement",
+                      "tag": "section",
+                      "line": 31,
+                      "children": [
+                        {
+                          "type": "ForStmt",
+                          "var": "p",
+                          "iterable": "products",
+                          "line": 32,
+                          "body": [
+                            {
+                              "type": "HtmlElement",
+                              "tag": "div",
+                              "line": 33,
+                              "children": [
+                                {
+                                  "type": "HtmlElement",
+                                  "tag": "h3",
+                                  "line": 34,
+                                  "children": [
+                                    {
+                                      "type": "JinjaExpression",
+                                      "expr": "p.name",
+                                      "line": 34
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "HtmlElement",
+                                  "tag": "p",
+                                  "line": 35,
+                                  "children": [
+                                    {
+                                      "type": "JinjaExpression",
+                                      "expr": "p.price",
+                                      "line": 35
+                                    },
+                                    {
+                                      "type": "HtmlText",
+                                      "text": "$",
+                                      "line": 35
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "IfStmt",
+                                  "condition": "p.price > 200",
+                                  "line": 37,
+                                  "then": [
+                                    {
+                                      "type": "HtmlElement",
+                                      "tag": "span",
+                                      "line": 38,
+                                      "children": [
+                                        {
+                                          "type": "HtmlText",
+                                          "text": "منتج مميز",
+                                          "line": 38
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "elif": [
+                                    {
+                                      "condition": "p.price > 50",
+                                      "body": [
+                                        {
+                                          "type": "HtmlElement",
+                                          "tag": "span",
+                                          "line": 40,
+                                          "children": [
+                                            {
+                                              "type": "HtmlText",
+                                              "text": "سعر متوسط",
+                                              "line": 40
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "else": [
+                                    {
+                                      "type": "HtmlElement",
+                                      "tag": "span",
+                                      "line": 42,
+                                      "children": [
+                                        {
+                                          "type": "HtmlText",
+                                          "text": "سعر اقتصادي",
+                                          "line": 42
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "HtmlElement",
+                                  "tag": "a",
+                                  "line": 45,
+                                  "children": [
+                                    {
+                                      "type": "HtmlText",
+                                      "text": "عرض التفاصيل",
+                                      "line": 45
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "elif": [],
+                  "else": [
+                    {
+                      "type": "HtmlElement",
+                      "tag": "p",
+                      "line": 50,
+                      "children": [
+                        {
+                          "type": "HtmlText",
+                          "text": "لا يوجد منتجات بعد. ابدئي بإضافة منتج جديد!",
+                          "line": 50
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "HtmlElement",
+              "tag": "script",
+              "line": 55,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

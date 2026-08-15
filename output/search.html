@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>بحث عن منتج</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="app-bar">
+    <h1><a href="index.html" class="logo-link">متجر المنتجات</a></h1>
+    <nav class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">كل المنتجات</a>
+        <a href="add_product.html">إضافة منتج</a>
+        <a href="search.html">بحث</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h2>ابحثي عن منتج</h2>
+
+    <input type="text" id="searchBox" class="search-input" placeholder="اكتبي اسم المنتج..." oninput="filterProducts()" />
+
+    <p class="search-info" id="searchInfo">اكتبي اسم منتج بالأعلى للبحث عنه.</p>
+
+    <section class="product-grid" id="resultsGrid"></section>
+
+</main>
+
+
+
+<script>
+    const allProducts = [
+    
+        { id: 1, name: "Phone", price: 100 },
+    
+        { id: 4, name: "wesam ahmad", price: 800 },
+    
+    ];
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>
