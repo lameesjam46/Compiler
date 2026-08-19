@@ -1,4 +1,4 @@
-// Generated from C:/Users/DELL/IdeaProjects/untitled3/src/CSS_Antlr/ParserCss.g4 by ANTLR 4.13.2
+// Generated from D:/compiler_2/Compiler/src/Grammer/CSSAntlr/ParserCss.g4 by ANTLR 4.13.2
 package Grammer.CSSAntlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -128,6 +128,20 @@ public interface ParserCssVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBorderProperty(ParserCss.BorderPropertyContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code borderSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBorderSideProperty(ParserCss.BorderSidePropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code borderCollapseProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBorderCollapseProperty(ParserCss.BorderCollapsePropertyContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code positionProperty}
 	 * labeled alternative in {@link ParserCss#property}.
 	 * @param ctx the parse tree
@@ -148,6 +162,125 @@ public interface ParserCssVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBackgroundProperty(ParserCss.BackgroundPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code backgroundShorthandProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBackgroundShorthandProperty(ParserCss.BackgroundShorthandPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code boxSizingProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoxSizingProperty(ParserCss.BoxSizingPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code lineHeightProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLineHeightProperty(ParserCss.LineHeightPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code maxWidthProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMaxWidthProperty(ParserCss.MaxWidthPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code minWidthProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMinWidthProperty(ParserCss.MinWidthPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code borderRadiusProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBorderRadiusProperty(ParserCss.BorderRadiusPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code boxShadowProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoxShadowProperty(ParserCss.BoxShadowPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code cursorProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCursorProperty(ParserCss.CursorPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code overflowProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOverflowProperty(ParserCss.OverflowPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code gapProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGapProperty(ParserCss.GapPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code textDecorationProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTextDecorationProperty(ParserCss.TextDecorationPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code justifyContentProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJustifyContentProperty(ParserCss.JustifyContentPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code alignItemsProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlignItemsProperty(ParserCss.AlignItemsPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code flexWrapProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFlexWrapProperty(ParserCss.FlexWrapPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code flexDirectionProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFlexDirectionProperty(ParserCss.FlexDirectionPropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code marginSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMarginSideProperty(ParserCss.MarginSidePropertyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code paddingSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPaddingSideProperty(ParserCss.PaddingSidePropertyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserCss#box_atom}.
 	 * @param ctx the parse tree
@@ -197,6 +330,12 @@ public interface ParserCssVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFont_family(ParserCss.Font_familyContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ParserCss#fontFamilyItem}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFontFamilyItem(ParserCss.FontFamilyItemContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ParserCss#display_rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -215,11 +354,17 @@ public interface ParserCssVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBorder_rule(ParserCss.Border_ruleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ParserCss#mediaRule}.
+	 * Visit a parse tree produced by {@link ParserCss#border_collapse_rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMediaRule(ParserCss.MediaRuleContext ctx);
+	T visitBorder_collapse_rule(ParserCss.Border_collapse_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#border_side_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBorder_side_rule(ParserCss.Border_side_ruleContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ParserCss#opacity_rule}.
 	 * @param ctx the parse tree
@@ -244,4 +389,112 @@ public interface ParserCssVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBackground_rule(ParserCss.Background_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#background_shorthand_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBackground_shorthand_rule(ParserCss.Background_shorthand_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#box_sizing_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBox_sizing_rule(ParserCss.Box_sizing_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#line_height_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLine_height_rule(ParserCss.Line_height_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#max_width_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMax_width_rule(ParserCss.Max_width_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#min_width_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMin_width_rule(ParserCss.Min_width_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#border_radius_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBorder_radius_rule(ParserCss.Border_radius_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#box_shadow_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBox_shadow_rule(ParserCss.Box_shadow_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#cursor_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCursor_rule(ParserCss.Cursor_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#overflow_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOverflow_rule(ParserCss.Overflow_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#gap_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGap_rule(ParserCss.Gap_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#text_decoration_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitText_decoration_rule(ParserCss.Text_decoration_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#justify_content_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJustify_content_rule(ParserCss.Justify_content_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#align_items_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlign_items_rule(ParserCss.Align_items_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#flex_wrap_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFlex_wrap_rule(ParserCss.Flex_wrap_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#flex_direction_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFlex_direction_rule(ParserCss.Flex_direction_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#margin_side_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMargin_side_rule(ParserCss.Margin_side_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#padding_side_rule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPadding_side_rule(ParserCss.Padding_side_ruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ParserCss#mediaRule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMediaRule(ParserCss.MediaRuleContext ctx);
 }

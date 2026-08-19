@@ -43,7 +43,7 @@ public class SemanticReportWriter {
             return;
         }
         for (String e : errors) {
-            sb.append("errors").append(e).append("\n");
+            sb.append(e).append("\n");
         }
     }
 }

@@ -1,10 +1,11 @@
 package Integrator;
 
-import java.io.IOException;
 import java.nio.file.*;
 
 /**
-
+ * ===============================================================
+ * AutoRegenerateWatcher — "الجافا يلي بتستمع للمتغيرات"
+ * ===============================================================
  *
  * السيناريو:
  *   1) تشغّلي هالبرنامج مرة وحدة — بيضل شغال بالخلفية (Infinite Loop)
@@ -23,8 +24,6 @@ public class AutoRegenerateWatcher {
     private static final String WATCHED_FILE = "flask_app.py";
 
     public static void main(String[] args) throws Exception {
-
-//        FormServer.startServer();
 
         System.out.println("=== AutoRegenerateWatcher: بدء المراقبة ===");
         System.out.println("  يراقب: " + WATCHED_DIRECTORY + "/" + WATCHED_FILE);

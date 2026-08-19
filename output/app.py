@@ -17,9 +17,9 @@ products = [
     
     {
         "id": 4,
-        "name": "wesam ahmad",
-        "price": 800,
-        "details": "خخ",
+        "name": "lamees",
+        "price": 900,
+        "details": "jj",
         "image": "default.jpg"
     }
 ]

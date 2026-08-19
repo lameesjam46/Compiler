@@ -154,42 +154,44 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- 2. حذف منتج ---
-    document.addEventListener("click", async function (e) {
-        if (e.target && e.target.classList.contains("btn-delete")) {
-            e.preventDefault();
+  // --- 2. حذف منتج ---
+      document.addEventListener("click", async function (e) {
+          if (e.target && e.target.classList.contains("btn-delete")) {
+              e.preventDefault();
 
-            const href = e.target.getAttribute("href") || "";
-            const match = href.match(/delete[=\/](\d+)/);
-            if (!match) return;
+              const href = e.target.getAttribute("href") || "";
+              const match = href.match(/delete[=\/](\d+)/);
+              if (!match) return;
 
-            const productId = match[1];
+              const productId = match[1];
 
-            // 1. طلب صلاحيات الملف أولاً (قبل التوقف عند confirm)
-            const handle = await getPyFileHandle();
-            if (!handle) return;
+              // 1. طلب صلاحيات الملف أولاً
+              const handle = await getPyFileHandle();
+              if (!handle) return;
 
-            // 2. طلب التأكيد بعد تأمين وصول الملف
-            if (!confirm("هل أنتِ متأكدة من حذف المنتج رقم " + productId + "؟")) return;
+              // 2. طلب التأكيد
+              if (!confirm("هل أنتِ متأكدة من حذف المنتج رقم " + productId + "؟")) return;
 
-            try {
-                const file = await handle.getFile();
-                let content = await file.text();
+              try {
+                  const file = await handle.getFile();
+                  let content = await file.text();
 
-                const regex = new RegExp(`\\{\\s*"id":\\s*${productId}[^}]*\\},?`, "g");
-                content = content.replace(regex, "");
+                  const regex = new RegExp(`\\{\\s*"id":\\s*${productId}[^}]*\\},?`, "g");
+                  content = content.replace(regex, "");
 
-                content = cleanPythonCode(content);
+                  content = cleanPythonCode(content);
 
-                const writable = await handle.createWritable();
-                await writable.write(content);
-                await writable.close();
+                  const writable = await handle.createWritable();
+                  await writable.write(content);
+                  await writable.close();
 
-                alert("تم الحذف بنجاح!");
-                window.location.reload();
-            } catch (err) {
-                alert("خطأ أثناء الحذف: " + err.message);
-            }
-        }
-    });
+                  alert("تم الحذف بنجاح!");
+
+                  // التعديل هنا: التوجيه لصفحة القائمة بدلاً من إعادة تحميل الصفحة المحذوفة
+                  window.location.href = "products.html";
+              } catch (err) {
+                  alert("خطأ أثناء الحذف: " + err.message);
+              }
+          }
+      });
 });

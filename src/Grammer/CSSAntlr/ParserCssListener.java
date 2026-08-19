@@ -1,4 +1,4 @@
-// Generated from C:/Users/DELL/IdeaProjects/untitled3/src/CSS_Antlr/ParserCss.g4 by ANTLR 4.13.2
+// Generated from D:/compiler_2/Compiler/src/Grammer/CSSAntlr/ParserCss.g4 by ANTLR 4.13.2
 package Grammer.CSSAntlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -206,6 +206,30 @@ public interface ParserCssListener extends ParseTreeListener {
 	 */
 	void exitBorderProperty(ParserCss.BorderPropertyContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code borderSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBorderSideProperty(ParserCss.BorderSidePropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code borderSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBorderSideProperty(ParserCss.BorderSidePropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code borderCollapseProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBorderCollapseProperty(ParserCss.BorderCollapsePropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code borderCollapseProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBorderCollapseProperty(ParserCss.BorderCollapsePropertyContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code positionProperty}
 	 * labeled alternative in {@link ParserCss#property}.
 	 * @param ctx the parse tree
@@ -241,6 +265,210 @@ public interface ParserCssListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBackgroundProperty(ParserCss.BackgroundPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code backgroundShorthandProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBackgroundShorthandProperty(ParserCss.BackgroundShorthandPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code backgroundShorthandProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBackgroundShorthandProperty(ParserCss.BackgroundShorthandPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code boxSizingProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoxSizingProperty(ParserCss.BoxSizingPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boxSizingProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoxSizingProperty(ParserCss.BoxSizingPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code lineHeightProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterLineHeightProperty(ParserCss.LineHeightPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code lineHeightProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitLineHeightProperty(ParserCss.LineHeightPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code maxWidthProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterMaxWidthProperty(ParserCss.MaxWidthPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code maxWidthProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitMaxWidthProperty(ParserCss.MaxWidthPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code minWidthProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterMinWidthProperty(ParserCss.MinWidthPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code minWidthProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitMinWidthProperty(ParserCss.MinWidthPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code borderRadiusProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBorderRadiusProperty(ParserCss.BorderRadiusPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code borderRadiusProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBorderRadiusProperty(ParserCss.BorderRadiusPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code boxShadowProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoxShadowProperty(ParserCss.BoxShadowPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boxShadowProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoxShadowProperty(ParserCss.BoxShadowPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code cursorProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterCursorProperty(ParserCss.CursorPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code cursorProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitCursorProperty(ParserCss.CursorPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code overflowProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterOverflowProperty(ParserCss.OverflowPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code overflowProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitOverflowProperty(ParserCss.OverflowPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code gapProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterGapProperty(ParserCss.GapPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code gapProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitGapProperty(ParserCss.GapPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code textDecorationProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterTextDecorationProperty(ParserCss.TextDecorationPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code textDecorationProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitTextDecorationProperty(ParserCss.TextDecorationPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code justifyContentProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterJustifyContentProperty(ParserCss.JustifyContentPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code justifyContentProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitJustifyContentProperty(ParserCss.JustifyContentPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code alignItemsProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlignItemsProperty(ParserCss.AlignItemsPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code alignItemsProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlignItemsProperty(ParserCss.AlignItemsPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code flexWrapProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterFlexWrapProperty(ParserCss.FlexWrapPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code flexWrapProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitFlexWrapProperty(ParserCss.FlexWrapPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code flexDirectionProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterFlexDirectionProperty(ParserCss.FlexDirectionPropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code flexDirectionProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitFlexDirectionProperty(ParserCss.FlexDirectionPropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code marginSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterMarginSideProperty(ParserCss.MarginSidePropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code marginSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitMarginSideProperty(ParserCss.MarginSidePropertyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code paddingSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void enterPaddingSideProperty(ParserCss.PaddingSidePropertyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code paddingSideProperty}
+	 * labeled alternative in {@link ParserCss#property}.
+	 * @param ctx the parse tree
+	 */
+	void exitPaddingSideProperty(ParserCss.PaddingSidePropertyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ParserCss#box_atom}.
 	 * @param ctx the parse tree
@@ -322,6 +550,16 @@ public interface ParserCssListener extends ParseTreeListener {
 	 */
 	void exitFont_family(ParserCss.Font_familyContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ParserCss#fontFamilyItem}.
+	 * @param ctx the parse tree
+	 */
+	void enterFontFamilyItem(ParserCss.FontFamilyItemContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#fontFamilyItem}.
+	 * @param ctx the parse tree
+	 */
+	void exitFontFamilyItem(ParserCss.FontFamilyItemContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ParserCss#display_rule}.
 	 * @param ctx the parse tree
 	 */
@@ -352,15 +590,25 @@ public interface ParserCssListener extends ParseTreeListener {
 	 */
 	void exitBorder_rule(ParserCss.Border_ruleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ParserCss#mediaRule}.
+	 * Enter a parse tree produced by {@link ParserCss#border_collapse_rule}.
 	 * @param ctx the parse tree
 	 */
-	void enterMediaRule(ParserCss.MediaRuleContext ctx);
+	void enterBorder_collapse_rule(ParserCss.Border_collapse_ruleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ParserCss#mediaRule}.
+	 * Exit a parse tree produced by {@link ParserCss#border_collapse_rule}.
 	 * @param ctx the parse tree
 	 */
-	void exitMediaRule(ParserCss.MediaRuleContext ctx);
+	void exitBorder_collapse_rule(ParserCss.Border_collapse_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#border_side_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterBorder_side_rule(ParserCss.Border_side_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#border_side_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitBorder_side_rule(ParserCss.Border_side_ruleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ParserCss#opacity_rule}.
 	 * @param ctx the parse tree
@@ -401,4 +649,184 @@ public interface ParserCssListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBackground_rule(ParserCss.Background_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#background_shorthand_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterBackground_shorthand_rule(ParserCss.Background_shorthand_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#background_shorthand_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitBackground_shorthand_rule(ParserCss.Background_shorthand_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#box_sizing_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterBox_sizing_rule(ParserCss.Box_sizing_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#box_sizing_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitBox_sizing_rule(ParserCss.Box_sizing_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#line_height_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterLine_height_rule(ParserCss.Line_height_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#line_height_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitLine_height_rule(ParserCss.Line_height_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#max_width_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterMax_width_rule(ParserCss.Max_width_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#max_width_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitMax_width_rule(ParserCss.Max_width_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#min_width_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterMin_width_rule(ParserCss.Min_width_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#min_width_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitMin_width_rule(ParserCss.Min_width_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#border_radius_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterBorder_radius_rule(ParserCss.Border_radius_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#border_radius_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitBorder_radius_rule(ParserCss.Border_radius_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#box_shadow_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterBox_shadow_rule(ParserCss.Box_shadow_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#box_shadow_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitBox_shadow_rule(ParserCss.Box_shadow_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#cursor_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterCursor_rule(ParserCss.Cursor_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#cursor_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitCursor_rule(ParserCss.Cursor_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#overflow_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterOverflow_rule(ParserCss.Overflow_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#overflow_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitOverflow_rule(ParserCss.Overflow_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#gap_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterGap_rule(ParserCss.Gap_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#gap_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitGap_rule(ParserCss.Gap_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#text_decoration_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterText_decoration_rule(ParserCss.Text_decoration_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#text_decoration_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitText_decoration_rule(ParserCss.Text_decoration_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#justify_content_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterJustify_content_rule(ParserCss.Justify_content_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#justify_content_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitJustify_content_rule(ParserCss.Justify_content_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#align_items_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlign_items_rule(ParserCss.Align_items_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#align_items_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlign_items_rule(ParserCss.Align_items_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#flex_wrap_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterFlex_wrap_rule(ParserCss.Flex_wrap_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#flex_wrap_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitFlex_wrap_rule(ParserCss.Flex_wrap_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#flex_direction_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterFlex_direction_rule(ParserCss.Flex_direction_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#flex_direction_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitFlex_direction_rule(ParserCss.Flex_direction_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#margin_side_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterMargin_side_rule(ParserCss.Margin_side_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#margin_side_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitMargin_side_rule(ParserCss.Margin_side_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#padding_side_rule}.
+	 * @param ctx the parse tree
+	 */
+	void enterPadding_side_rule(ParserCss.Padding_side_ruleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#padding_side_rule}.
+	 * @param ctx the parse tree
+	 */
+	void exitPadding_side_rule(ParserCss.Padding_side_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ParserCss#mediaRule}.
+	 * @param ctx the parse tree
+	 */
+	void enterMediaRule(ParserCss.MediaRuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ParserCss#mediaRule}.
+	 * @param ctx the parse tree
+	 */
+	void exitMediaRule(ParserCss.MediaRuleContext ctx);
 }
