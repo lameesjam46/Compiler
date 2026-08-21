@@ -6,8 +6,18 @@ import java.util.*;
 public class SemanticAnalyzer {
     private final SymbolTable symbolTable;
     private final List<String> scopeErrors = new ArrayList<>();
+    private final Set<String> reportedUndefinedVariables = new HashSet<>();
 
     public SemanticAnalyzer(SymbolTable symbolTable) { this.symbolTable = symbolTable; }
+
+    public SemanticAnalyzer(SymbolTable symbolTable, Set<String> externalVariables) {
+        this.symbolTable = symbolTable;
+        if (externalVariables != null) {
+            for (String name : externalVariables) {
+                this.symbolTable.addExternalSymbol(name);
+            }
+        }
+    }
 
     public void analyze(Program program) {
         for (Node node : program.getNodes()) visit(node);
@@ -77,9 +87,20 @@ public class SemanticAnalyzer {
             if (symbolTable.wasDefinedInClosedScope(name)) {
                 scopeErrors.add("Scope Error: Variable '" + name + "' used out of scope at line " + expr.getLine());
             }
+            else if (symbolTable.lookup(name) == null) {
+                addUndefinedVariableError(name, expr.getLine());
+            }
         }
         else if (expr instanceof PostfixExpr) {
-            checkExpressionScope(((PostfixExpr) expr).getBase());
+            PostfixExpr postfix = (PostfixExpr) expr;
+            checkExpressionScope(postfix.getBase());
+
+            for (PostfixPart part : postfix.getParts()) {
+                if (part instanceof IndexAccess index) {
+                    checkExpressionScope(index.getStart());
+                    checkExpressionScope(index.getEnd());
+                }
+            }
         }
         else if (expr instanceof BinaryExpr) { // الاسم الصحيح هو BinaryExpr
             BinaryExpr bin = (BinaryExpr) expr;
@@ -88,6 +109,13 @@ public class SemanticAnalyzer {
         }
         else if (expr instanceof UnaryExpr) {
             checkExpressionScope(((UnaryExpr) expr).getExpr());
+        }
+    }
+
+    private void addUndefinedVariableError(String name, int line) {
+        String key = name + "@" + line;
+        if (reportedUndefinedVariables.add(key)) {
+            scopeErrors.add("Undefined Variable Error: Variable '" + name + "' is not defined at line " + line);
         }
     }
 

@@ -104,9 +104,9 @@ public class MainIntegration {
         // ============================================================
         Program indexAst = parseJinjaFile("Input/templates/index.html");
         List<String> jinjaErrorsAll = new ArrayList<>();
-        jinjaErrorsAll.addAll(analyzeJinja(indexAst));
 
         RenderContext homeContext = RenderContext.forHome(products, avgPrice);
+        jinjaErrorsAll.addAll(analyzeJinja(indexAst, homeContext));
         String indexHtml = new JinjaEvaluator(homeContext).render(indexAst);
         outputManager.writeGeneratedPage("index.html", indexHtml);
         log.append("[").append(java.time.LocalDateTime.now()).append("] تم توليد: index.html\n");
@@ -115,9 +115,9 @@ public class MainIntegration {
         // 4. توليد صفحة products.html (show_products)
         // ============================================================
         Program productsAst = parseJinjaFile("Input/templates/products.html");
-        jinjaErrorsAll.addAll(analyzeJinja(productsAst));
 
         RenderContext productsContext = RenderContext.forProducts(products);
+        jinjaErrorsAll.addAll(analyzeJinja(productsAst, productsContext));
         String productsHtml = new JinjaEvaluator(productsContext).render(productsAst);
         outputManager.writeGeneratedPage("products.html", productsHtml);
         log.append("[").append(java.time.LocalDateTime.now()).append("] تم توليد: products.html\n");
@@ -126,7 +126,7 @@ public class MainIntegration {
         // 5. توليد صفحة product_detail لكل منتج على حدة
         // ============================================================
         Program detailAst = parseJinjaFile("Input/templates/product_detail.html");
-        jinjaErrorsAll.addAll(analyzeJinja(detailAst));
+        jinjaErrorsAll.addAll(analyzeJinja(detailAst, RenderContext.forProductDetail(new java.util.LinkedHashMap<>())));
 
         for (Map<String, Object> product : products) {
             RenderContext detailContext = RenderContext.forProductDetail(product);
@@ -140,9 +140,10 @@ public class MainIntegration {
         // 6. توليد صفحة add_product.html (فورم ثابت، بدون بيانات)
         // ============================================================
         Program addProductAst = parseJinjaFile("Input/templates/add_product.html");
-        jinjaErrorsAll.addAll(analyzeJinja(addProductAst));
 
-        String addProductHtml = new JinjaEvaluator(new RenderContext()).render(addProductAst);
+        RenderContext addProductContext = new RenderContext();
+        jinjaErrorsAll.addAll(analyzeJinja(addProductAst, addProductContext));
+        String addProductHtml = new JinjaEvaluator(addProductContext).render(addProductAst);
         outputManager.writeGeneratedPage("add_product.html", addProductHtml);
         log.append("[").append(java.time.LocalDateTime.now()).append("] تم توليد: add_product.html\n");
 
@@ -150,9 +151,9 @@ public class MainIntegration {
         // 7. توليد صفحة search.html — بحث JavaScript لحظي (بدون سيرفر)
         // ============================================================
         Program searchAst = parseJinjaFile("Input/templates/search.html");
-        jinjaErrorsAll.addAll(analyzeJinja(searchAst));
 
         RenderContext searchContext = RenderContext.forProducts(products);
+        jinjaErrorsAll.addAll(analyzeJinja(searchAst, searchContext));
         String searchHtml = new JinjaEvaluator(searchContext).render(searchAst);
         outputManager.writeGeneratedPage("search.html", searchHtml);
         log.append("[").append(java.time.LocalDateTime.now())
@@ -208,9 +209,9 @@ public class MainIntegration {
         return (Program) visitor.visit(tree);
     }
 
-    private static List<String> analyzeJinja(Program jinjaAst) {
+    private static List<String> analyzeJinja(Program jinjaAst, RenderContext context) {
         SymbolTable symbolTable = new SymbolTable();
-        SemanticAnalyzer analyzer = new SemanticAnalyzer(symbolTable);
+        SemanticAnalyzer analyzer = new SemanticAnalyzer(symbolTable, context.asMap().keySet());
         analyzer.analyze(jinjaAst);
         return analyzer.getErrors();
     }

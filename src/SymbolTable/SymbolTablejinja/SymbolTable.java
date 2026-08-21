@@ -45,6 +45,19 @@ public class SymbolTable {
         return true;
     }
 
+    /**
+     * تعريف متغيرات خارجية قادمة من Python/DataBridge قبل فحص قالب Jinja.
+     * مثال: products, avg_price, product, count.
+     */
+    public void addExternalSymbol(String name) {
+        if (name == null || name.isBlank()) return;
+        if (builtIns.containsKey(name)) return;
+        if (stack.peek().containsLocally(name)) return;
+
+        stack.peek().addSymbol(new Symbol(name, Symbol.SymbolType.VARIABLE, 0));
+        closedScopeVariables.remove(name);
+    }
+
     public boolean existsInAnyScope(String name) {
         Scope current = stack.peek();
         while (current != null) {
