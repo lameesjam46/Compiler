@@ -68,6 +68,39 @@ public class FlaskSemanticAnalyzer {
                 }
             }
         }
+// ============================================================
+// 🆕 فحص Type Mismatch: عمليات ثنائية بين أنواع غير متوافقة
+// ============================================================
+        if (node instanceof BinaryOpNode) {
+            java.util.List<ASTNode> children = node.getChildren();
+            if (children.size() >= 2) {
+                ASTNode left = children.get(0);
+                ASTNode right = children.get(1);
+                String operator = node.getNodeName().replace("BinaryOp: ", "").trim();
+
+                String leftType = resolveType(left, globalScope);
+                String rightType = resolveType(right, globalScope);
+
+                if (!leftType.equals("unknown") && !rightType.equals("unknown")
+                        && !leftType.equals(rightType)) {
+
+                    this.hasSemanticErrors = true;
+
+                    String message = "Type Mismatch: cannot apply operator '" + operator
+                            + "' between " + leftType + " and " + rightType
+                            + " (line " + node.getLineno() + ")";
+                    this.errors.add(message);
+
+                    System.err.println("\n [Flask Semantic Error]: Type Mismatch!");
+                    System.err.println("   -> Operator: '" + operator + "'");
+                    System.err.println("   -> Left type: " + leftType + ", Right type: " + rightType);
+                    System.err.println("   -> Error at line: " + node.getLineno());
+                    System.err.println("--------------------------------------------------");
+                }
+            }
+        }
+
+
 
         if (node.getChildren() != null) {
             for (ASTNode child : node.getChildren()) {
@@ -96,5 +129,31 @@ public class FlaskSemanticAnalyzer {
             }
         }
         return null;
+    }
+
+    /**
+     * 🆕 يستنتج نوع طرف عملية (Literal مباشر أو متغير عبر Scope)
+     * بيرجع: "number", "string", "boolean", أو "unknown"
+     */
+    private String resolveType(ASTNode node, Scope scope) {
+        if (node == null) return "unknown";
+
+        // أولاً: نجرب نستخرج النوع من شكل العقدة نفسها (Literal / Call)
+        String basicType = SymbolTable.SymbolFlask.SymbolTableBuilder.inferType(node);
+        if (!basicType.equals("unknown")) {
+            return basicType;
+        }
+
+        // ثانيًا: لو كانت متغير (Var: ...)، نرجع نسأل الـ Scope الصحيح عن نوعه المخزّن
+        String name = node.getNodeName();
+        if (name != null && name.startsWith("Var: ")) {
+            String varName = name.replace("Var: ", "").trim();
+            Symbol sym = scope.resolve(varName);
+            if (sym != null && sym.getType() != null) {
+                return sym.getType();
+            }
+        }
+
+        return "unknown";
     }
 }

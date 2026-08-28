@@ -54,7 +54,10 @@ public class SymbolTableBuilder {
                     ? SymbolKind.IF_VARIABLE.toString()
                     : SymbolKind.VARIABLE.toString();
 
-            currentScope.define(new Symbol(name, kind, node.getLineno()));
+
+            Symbol sym = new Symbol(name, kind, node.getLineno());
+            sym.setType(inferType(node.getRight()));   // 🆕 استنتاج النوع من القيمة المسندة
+            currentScope.define(sym);
         }
 
         if (node.getRight() != null) {
@@ -70,6 +73,67 @@ public class SymbolTableBuilder {
             return name.replace("Var: ", "").trim();
         }
         return null;
+    }
+
+    /**
+     * 🆕 يستنتج نوع البيانات المنطقي لعقدة AST معينة.
+     * بيرجع: "number", "string", "boolean", أو "unknown"
+     */
+    public static String inferType(ASTNode node) {
+        if (node == null) return "unknown";
+
+        String name = node.getNodeName();
+        if (name == null) return "unknown";
+
+        // الحالة 1: قيمة رقمية مباشرة → "Number: 100"
+        if (name.startsWith("Number: ")) {
+            return "number";
+        }
+
+        // الحالة 2: قيمة نصية مباشرة → "String: \"Phone\""
+        if (name.startsWith("String: ")) {
+            return "string";
+        }
+
+        // الحالة 3: قيمة بوليان → "Boolean: True" / "Boolean: False"
+        if (name.startsWith("Boolean: ")) {
+            return "boolean";
+        }
+
+        // الحالة 4: متغير (Identifier) → "Var: price" — لازم نرجع نسأل الـ Scope عنه
+        if (name.startsWith("Var: ")) {
+            return "unknown"; // الحل الكامل (مع Scope) موجود بنسخة FlaskSemanticAnalyzer
+        }
+
+        // الحالة 5: استدعاء دالة معروفة → float(...), int(...), str(...)
+        if (node instanceof CallNode) {
+            ASTNode func = ((CallNode) node).getFunction();
+            if (func != null && func.getNodeName() != null) {
+                String funcName = func.getNodeName().replace("Var: ", "").trim();
+                if (funcName.equals("float") || funcName.equals("int") || funcName.equals("len")) {
+                    return "number";
+                }
+                if (funcName.equals("str")) {
+                    return "string";
+                }
+            }
+            return "unknown";
+        }
+
+        // الحالة 6: عملية ثنائية (a + b) → لو الطرفين نفس النوع، النتيجة نفس النوع
+        if (node instanceof BinaryOpNode) {
+            if (node.getChildren().size() >= 2) {
+                String leftType = inferType(node.getChildren().get(0));
+                String rightType = inferType(node.getChildren().get(1));
+                if (leftType.equals(rightType) && !leftType.equals("unknown")) {
+                    return leftType;
+                }
+            }
+            return "unknown";
+        }
+
+        // أي حالة تانية غير معروفة
+        return "unknown";
     }
 
     private void visitIf(IfNode node) {

@@ -32,7 +32,8 @@ public class Scope {
         System.out.println(indent + "Scope: " + name);
 
         for (Symbol s : symbols.values()) {
-            System.out.println(indent + "  -> " + s.getName() + " [" + s.getKind() + "]");
+            System.out.println(indent + "  -> " + s.getName() + " [" + s.getKind() + "]"
+                    + (s.getType() != null ? " (type: " + s.getType() + ")" : ""));
 
             if (s.getInnerScope() != null) {
                 s.getInnerScope().print(indent + "      ");
