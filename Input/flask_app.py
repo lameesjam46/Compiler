@@ -135,5 +135,19 @@ def search():
         results=results
     )
 
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+# ============================================================
+#          اختبار شامل لفحص    Type Mismatch
+# ============================================================
+
+# #test_case_1 = 10 + "text"
+# test_case_2 = True + 5
+# test_case_3 = "active" + False
+# test_case_4 = 100 > "expensive"
+# test_case_5 = float("9.99") + "extra"
+# test_case_valid = 5 + 10
+# test_case_valid2 = "a" + "b"
