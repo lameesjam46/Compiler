@@ -6,6 +6,8 @@ public class Symbol {
     private String kind;
     private Scope innerScope;
     private int line;
+    private String type; //  نوع البيانات: "number", "string", "boolean", "unknown"
+
 
     public Symbol(String name, String kind, int line) {
         this.name = name;
@@ -35,8 +37,18 @@ public class Symbol {
         this.innerScope = innerScope;
     }
 
-    @Override
-    public String toString() {
-        return name + " : " + kind + " (line " + line + ")";
+
+    public String getType() {
+        return type;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
+@Override
+public String toString() {
+    return name + " : " + kind + (type != null ? " [" + type + "]" : "") + " (line " + line + ")";
+}
 }
